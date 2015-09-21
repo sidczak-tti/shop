@@ -1,0 +1,19 @@
+application_shop_product:
+    resource: "@ApplicationShopBundle/Resources/config/routing/product.yml"
+    prefix:   /product
+    
+application_shop_order:
+    resource: "@ApplicationShopBundle/Resources/config/routing/order.yml"
+    prefix:   /order
+
+#application_shop_homepage:
+#    pattern:  /
+#    defaults: { _controller: ApplicationShopBundle:Product:index }
+    
+application_shop_start:
+    path:  /
+    defaults: { _controller: ApplicationShopBundle:Start:index }
+    
+application_shop_category:
+    path:  /category/{slug}/{page}
+    defaults: { _controller: ApplicationShopBundle:Category:show, page: 1 }

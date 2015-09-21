@@ -1,0 +1,38 @@
+{% extends 'ApplicationShopBundle::layout.html.twig' %}
+
+{% block title %}Protuct{% endblock %}
+
+{% block stylesheets %}{% endblock %}
+
+{% block javascripts %}{% endblock %}
+
+{% block body %}
+<div class="container">
+
+    <div class="row">    
+    	<div class="col-lg-12">
+    		<ul class="breadcrumb">
+                <li><a href="{{ path('application_shop_start') }}">Start</a></li>
+                <li><a href="{{ path('application_product') }}">Produkts</a></li>
+                <li><a href="{{ path('application_shop_category', { 'slug': entity.categoryslug }) }}">{{ entity.category }}</a></li>
+                <li class="active">{{ entity.title|raw }}</li>
+            </ul>
+    	</div>
+    </div>
+
+	<div class="row">
+	    <div class="col-md-6">
+	        <img class="img-circle img-responsive img-center" src="{{ asset('bundles/applicationshop/images/500x500.png') }}" alt="{{ entity.title|raw }}">
+	    </div>
+	    <div class="col-md-6">
+	    	<div class="product-header">
+	    		<h2>{{ entity.title|raw }}<br/><small>{{ entity.code }}</small></h2>
+	    		<h4>Price: {{ entity.price }} zł</h4>
+	    	</div>
+	    	<p>{{ entity.description|raw }}</p>
+	    	<p>{{ entity.descriptionfull|raw }}</p>
+	    	<p><a class="btn btn-default" href="{{ path('application_product') }}" role="button">Back to the list</a></p>
+	    </div>
+	</div>
+</div>
+{% endblock %}

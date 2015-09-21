@@ -1,0 +1,139 @@
+{% extends 'ApplicationShopAdminBundle::layout.html.twig' %}
+
+{% block title %}Start{% endblock %}
+
+{% block stylesheets %}{% endblock %}
+
+{% block javascripts %}{% endblock %}
+
+{% form_theme form _self %}
+ 
+{% block form_errors %}
+{% spaceless %}
+    {% if errors|length > 0 %}
+        {% for error in errors %}
+            <small class="help-block">{{ error.messageTemplate|trans(error.messageParameters, 'validators') }}</small>
+        {% endfor %}
+    {% endif %}
+{% endspaceless %}
+{% endblock form_errors %}
+
+{% block choice_widget_expanded %}
+{% spaceless %}
+    <div {{ block('widget_container_attributes') }} class="my-form-choices">
+    {% for child in form %}
+        {{ form_widget(child) }}
+    {% endfor %}
+    </div>
+{% endspaceless %}
+{% endblock choice_widget_expanded %}
+
+{% block checkbox_widget %}
+{% spaceless %}
+    <div class="checkbox">
+        <label for="{{ id }}"><input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />{{ label|trans({}, translation_domain) }}</label>
+    </div>
+{% endspaceless %}
+{% endblock checkbox_widget %}
+
+{% block radio_widget %}
+{% spaceless %}
+    <div class="radio">
+        <label for="{{ id }}"><input type="radio" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />{{ label|trans({}, translation_domain) }}</label>
+    </div>
+{% endspaceless %}
+{% endblock radio_widget %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="page-header">Product creation</h1>
+        </div>  
+    </div>
+    <div class="row">
+        <div class="col-sm-offset-3 col-md-6">
+        {# {{ form(form) }} #}
+
+        {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+
+            {{ form_errors(form) }}
+            
+            <div class="form-group {% if form_errors(form.category) %} has-error {% endif %}">
+                {{ form_label(form.category) }} *
+                {{ form_widget(form.category, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(form.category) }}
+            </div>
+            <div class="form-group {% if form_errors(form.file) %} has-error {% endif %}">
+                {{ form_label(form.file) }}
+                {{ form_widget(form.file) }}
+                {# {{ form_widget(form.file, { 'full_name': 'application_shopadminbundle_product[file]' ~ '[]' }) }} #}
+                {{ form_errors(form.file) }}
+            </div>
+            <div class="form-group {% if form_errors(form.title) %} has-error {% endif %}">
+                {{ form_label(form.title) }} *
+                {{ form_widget(form.title, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(form.title) }}
+            </div>
+            <div class="form-group {% if form_errors(form.code) %} has-error {% endif %}">
+                {{ form_label(form.code) }} *
+                {{ form_widget(form.code, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(form.code) }}
+            </div>
+            <div class="form-group {% if form_errors(form.price) %} has-error {% endif %}">
+                {{ form_label(form.price) }} *
+                {{ form_widget(form.price, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(form.price) }}
+            </div>
+            <div class="form-group {% if form_errors(form.price_promotion) %} has-error {% endif %}"">
+                {{ form_label(form.price_promotion) }}
+                {{ form_widget(form.price_promotion, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(form.price_promotion) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.amount) }}
+                {{ form_widget(form.amount, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(form.amount) }}
+            </div>
+            <div class="form-group {% if form_errors(form.description) %} has-error {% endif %}">
+                {{ form_label(form.description) }} *
+                {{ form_widget(form.description, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(form.description) }}
+            </div>
+            <div class="form-group {% if form_errors(form.description_full) %} has-error {% endif %}">
+                {{ form_label(form.description_full) }} *
+                {{ form_widget(form.description_full, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(form.description_full) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.is_active) }}
+                {{ form_widget(form.is_active) }}
+                {{ form_errors(form.is_active) }}
+            </div>
+            <div class="form-group {% if form_errors(form.created_at) %} has-error {% endif %}">
+                {{ form_label(form.created_at) }}
+                {{ form_widget(form.created_at, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(form.created_at) }}
+            </div>
+            <div class="form-group {% if form_errors(form.updated_at) %} has-error {% endif %}">
+                {{ form_label(form.updated_at) }}
+                {{ form_widget(form.updated_at, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(form.updated_at) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.tags) }}
+                {{ form_widget(form.tags, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(form.tags) }}
+            </div>
+
+            <div class="form-group">
+                <a class="btn btn-default" href="{{ path('application_admin_product') }}">Back to the list</a>
+                {{ form_widget(form.submit, { 'attr': {'class': 'btn btn-default'} }) }}
+            </div>
+
+        {{ form_end(form) }}
+
+        </div>
+    </div>
+</div>
+{% endblock %}

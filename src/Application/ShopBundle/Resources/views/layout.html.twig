@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset={{ _charset }}"/>
+        <meta name="robots" content="noindex,nofollow" />
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	    <meta name="description" content="">
+	    <meta name="author" content="">
+	    <link rel="icon" href="{{ asset('bundles/applicationbootstrap/images/favicon.ico') }}">
+	    
+        <title>{% block title %}Test Application{% endblock %}</title>
+        
+        <!-- Bootstrap core CSS -->
+        <link href="{{ asset('bundles/applicationshop/css/bootstrap.css') }}" rel="stylesheet" type="text/css" media="all" />
+        
+        <link href="{{ asset('bundles/applicationshop/css/shop.css') }}" rel="stylesheet" type="text/css" media="all" />
+        
+        <link href="{{ asset('bundles/applicationshop/css/font-awesome.css') }}" rel="stylesheet" type="text/css" media="all" />
+       
+	    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+	    <!--[if lt IE 9]><script src="{{ asset('bundles/applicationshop/assets/js/ie8-responsive-file-warning.js') }}" type="text/javascript"></script><![endif]-->
+	    <script src="{{ asset('bundles/applicationshop/assets/js/ie-emulation-modes-warning.js') }}" type="text/javascript"></script>
+
+	    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	    <!--[if lt IE 9]>
+	      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js" type="text/javascript"></script>
+	      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js" type="text/javascript"></script>
+	    <![endif]-->
+    
+	    <!-- Bootstrap core JavaScript
+	    ================================================== -->
+	    <!-- Placed at the end of the document so the pages load faster -->
+	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" type="text/javascript"></script>
+	    <script src="{{ asset('bundles/applicationshop/js/bootstrap.min.js') }}" type="text/javascript"></script>
+	    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+	    <script src="{{ asset('bundles/applicationshop/assets/js/vendor/holder.js') }}" type="text/javascript"></script>
+	    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	    <script src="{{ asset('bundles/applicationshop/assets/js/ie10-viewport-bug-workaround.js') }}" type="text/javascript"></script>
+
+        {% block stylesheets %}{% endblock %}
+        {% block javascripts %}{% endblock %}
+        
+    </head>
+    <body>
+        {% block navigation %}
+            <!-- Static navbar -->
+            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+                <div class="container">
+                    
+					<div class="navbar-header">
+					    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse-bs">
+					        <span class="sr-only">Toggle navigation</span>
+					        <span class="icon-bar"></span>
+					        <span class="icon-bar"></span>
+					        <span class="icon-bar"></span>
+					    </button>
+					    <a class="navbar-brand" href="{{ path('application_shop_start') }}">Company</a>
+					</div>
+					<div class="collapse navbar-collapse navbar-collapse-bs">
+					    <ul class="nav navbar-nav">
+					        <li><a href="{{ path('application_shop_start') }}">Start</a></li>
+					        <li><a href="{{ path('application_product') }}">Produkts</a></li>
+					        {#
+					        <li class="dropdown">
+					            <a class="dropdown-toggle" data-toggle="dropdown">Produkt <span class="caret"></span></a>
+					            <ul class="dropdown-menu" role="menu">
+					                <li><a href="{{ path('application_product') }}">Desktops</a></li>
+					                <li><a href="{{ path('application_product') }}">Laptops</a></li>
+					                <li><a href="{{ path('application_product') }}">Tablets</a></li>
+					                <li><a href="{{ path('application_product') }}">Cell Phones</a></li>
+					            </ul>
+					        </li>
+					        #}
+					    </ul>
+					    <ul class="nav navbar-nav navbar-right">
+					        <li><a href="#">Moje konto</a></li>
+					        <li><a href="{{ path('application_order_cart') }}">Koszyk</a></li>
+					        <li><a href="#">Zaloguj się</a></li>
+					    </ul>
+                    
+                </div>
+            </nav>
+        {% endblock %}
+        
+		{% for flashMessage in app.session.flashbag.get('notice') %}
+		    <div class="flash-notice">
+		        {{ flashMessage }}
+		    </div>
+		{% endfor %}
+		{% for flashMessage in app.session.flashbag.get('error') %}
+		    <div class="flash-error">
+		        {{ flashMessage }}
+		    </div>
+		{% endfor %}
+		
+        {% block body %}{% endblock %}
+        
+        {% if app.session.get('product_history') %}
+		<div class="container">
+		    <div class="row">
+		    	<div class="col-md-12">
+			    	<div class="page-header">
+			    		<h3>Recent viewed products</h3>
+			    	</div>
+		    	</div>
+		    	{% for product in app.session.get('product_history') %}   
+		    	<div class="col-md-4 text-center">
+		    		<div class="page-header">
+		    			<h4><a href="{{ path('application_product_show', { 'id': product.id, 'title': product.titleslug }) }}">{{ product.title|raw }}</a></h4>
+		    		</div>
+		    	</div>
+		    	{% endfor %}
+		    </div>
+		</div>
+		{% endif %}
+        
+        {% block footer %}
+            <div class="footer">
+                <div class="container">
+                    <p class="text-muted">Place sticky footer content here.</p>
+                </div>
+            </div>
+            <div class="footer">
+                <div class="container">
+                    <p class="pull-right"><a href="#">Back to top</a></p>
+                    <p>&copy; 2015 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a> &middot; <a href="{{ path('application_shop_admin_homepage') }}">Dashboard</a></p>
+                </div>
+            </div>
+        {% endblock %}
+    </body>
+</html>

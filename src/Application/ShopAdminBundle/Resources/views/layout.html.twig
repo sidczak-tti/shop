@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset={{ _charset }}"/>
+        <meta name="robots" content="noindex,nofollow" />
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	    <meta name="description" content="">
+	    <meta name="author" content="">
+	    <link rel="icon" href="{{ asset('bundles/applicationbootstrap/images/favicon.ico') }}">
+	    
+        <title>{% block title %}Test Application{% endblock %}</title>
+        
+        <!-- Bootstrap core CSS -->
+        <link href="{{ asset('bundles/applicationshop/css/bootstrap.css') }}" rel="stylesheet" type="text/css" media="all" />
+        
+        <link href="{{ asset('bundles/applicationshop/css/dashboard.css') }}" rel="stylesheet" type="text/css" media="all" />
+        
+        <link href="{{ asset('bundles/applicationshop/css/font-awesome.css') }}" rel="stylesheet" type="text/css" media="all" />
+       
+	    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+	    <!--[if lt IE 9]><script src="{{ asset('bundles/applicationshop/assets/js/ie8-responsive-file-warning.js') }}" type="text/javascript"></script><![endif]-->
+	    <script src="{{ asset('bundles/applicationshop/assets/js/ie-emulation-modes-warning.js') }}" type="text/javascript"></script>
+
+	    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	    <!--[if lt IE 9]>
+	      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js" type="text/javascript"></script>
+	      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js" type="text/javascript"></script>
+	    <![endif]-->
+    
+	    <!-- Bootstrap core JavaScript
+	    ================================================== -->
+	    <!-- Placed at the end of the document so the pages load faster -->
+	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" type="text/javascript"></script>
+	    <script src="{{ asset('bundles/applicationshop/js/bootstrap.min.js') }}" type="text/javascript"></script>
+	    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+	    <script src="{{ asset('bundles/applicationshop/assets/js/vendor/holder.js') }}" type="text/javascript"></script>
+	    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	    <script src="{{ asset('bundles/applicationshop/assets/js/ie10-viewport-bug-workaround.js') }}" type="text/javascript"></script>
+
+        {% block stylesheets %}{% endblock %}
+        {% block javascripts %}{% endblock %}
+        
+    </head>
+    <body>
+		<div id="wrapper">
+        	{% block navigation %}
+	        <!-- Navigation -->
+	        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		        <div class="container-fluid">
+		            
+		            <div class="navbar-header">
+		                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+		                    <span class="sr-only">Toggle navigation</span>
+		                    <span class="icon-bar"></span>
+		                    <span class="icon-bar"></span>
+		                    <span class="icon-bar"></span>
+		                </button>
+		                <a class="navbar-brand" href="{{ path('application_shop_admin_homepage') }}">Shop Admin</a>
+		            </div>
+		            
+		            <div class="navbar-collapse xcollapse">
+		                <ul class="nav user-nav navbar-right">
+		                    <li class="dropdown">
+				                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <span class="caret"></span></a>
+				                <ul class="dropdown-menu dropdown-alerts">
+					                <li>
+					                	<a href="#"><i class="fa fa-comment fa-fw"></i> New Comment <span class="text-muted small">4 minutes ago</span></a>
+					                </li>
+					                <li class="divider"></li>
+					                <li>
+					                	<a href="#"><i class="fa fa-twitter fa-fw"></i> 3 New Followers <span class="text-muted small">14 minutes ago</span></a>
+					                </li>
+					                <li class="divider"></li>
+					                <li>
+					                	<a href="#"><i class="fa fa-envelope fa-fw"></i> Message Sent <span class="text-muted small">4 minutes ago</span></a>
+					                </li>
+					                <li class="divider"></li>
+					                <li>
+					                	<a href="#"><i class="fa fa-tasks fa-fw"></i> New Task <span class="text-muted small">4 minutes ago</span></a>
+					                </li>
+					                <li class="divider"></li>
+					                <li>
+					                	<a href="#"><i class="fa fa-upload fa-fw"></i> Server Rebooted <span class="text-muted small">4 minutes ago</span></a>
+					                </li>
+					                <li class="divider"></li>
+					                <li class="text-center"><a href="#">Read All Alerts <i class="fa fa-angle-right"></i></a></li>
+				                </ul>
+				            </li>
+		                    <li class="dropdown">
+				                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <span class="caret"></span></a>
+				                <ul class="dropdown-menu dropdown-messages">
+			                        <li>
+			                            <a href="#">
+			                            	<span class="pull-right text-muted">4 minutes ago</span> <b>John Smith</b><br/>
+			                            	<span class="msg-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</span>
+			                            </a>
+			                        </li>
+			                        <li class="divider"></li>
+			                        <li>
+			                            <a href="#">
+			                            	<span class="pull-right text-muted">4 minutes ago</span> <b>John Smith</b><br/>
+			                            	<span class="msg-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</span>
+			                            </a>
+			                        </li>
+			                        <li class="divider"></li>
+			                        <li>
+			                            <a href="#">
+			                            	<span class="pull-right text-muted">4 minutes ago</span> <b>John Smith</b><br/>
+			                            	<span class="msg-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</span>
+			                            </a>
+			                        </li>
+			                        <li class="divider"></li>
+			                        <li>
+			                            <a href="#">
+			                            	<span class="pull-right text-muted">4 minutes ago</span> <b>John Smith</b><br/>
+			                            	<span class="msg-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</span>
+			                            </a>
+			                        </li>
+					                <li class="divider"></li>
+					                <li class="text-center"><a href="#">Read All New Messages <i class="fa fa-angle-right"></i></a></li>
+				                </ul>
+				            </li>
+			                <li class="dropdown">
+			                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith {{ app.user ? app.user.username : 'Anonymous' }} <b class="caret"></b></a>
+			                    <ul class="dropdown-menu">
+			                        <li>
+			                            <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
+			                        </li>
+			                        <li>
+			                            <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
+			                        </li>
+			                        <li>
+			                            <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
+			                        </li>
+			                        <li class="divider"></li>
+			                        <li>
+			                            <a href="{{ path('application_shop_admin_logout') }}"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+			                        </li>
+			                    </ul>
+			                </li>
+		                </ul>
+	
+		            </div>
+		        </div>    
+		        <div class="sidebar">
+		            <div class="collapse navbar-collapse navbar-ex1-collapse">
+		                <ul class="nav sidebar-nav">
+		                    <li class="{{ app.request.get('_route') == 'application_shop_admin_homepage' ? 'active' : '' }}">
+		                        <a href="{{ path('application_shop_admin_homepage') }}"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+		                    </li>
+		                    {% if is_granted('ROLE_ADMIN') %}
+		                    <li>
+		                        <a href="#"><i class="fa fa-fw fa-file"></i> Users</a>
+		                    </li>
+		                    {% endif %}
+		                    <li class="{{ app.request.get('_route') == 'application_admin_category' ? 'active' : '' }}">
+		                        <a href="{{ path('application_admin_category') }}"><i class="fa fa-fw fa-table"></i> Categories</a>
+		                    </li>
+		                    <li class="{{ app.request.get('_route') == 'application_admin_product' ? 'active' : '' }}">
+		                        <a href="{{ path('application_admin_product', { 'sort_col': 'reset', 'sort_type': 'reset' }) }}"><i class="fa fa-fw fa-table"></i> Products</a>
+		                    </li>
+		                    <li>
+		                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
+		                        <ul id="demo" class="nav collapse">
+		                            <li>
+		                                <a href="#">Dropdown Item</a>
+		                            </li>
+		                            <li>
+		                                <a href="#">Dropdown Item</a>
+		                            </li>
+		                        </ul>
+		                    </li>
+		                    <li>
+		                        <a href="#"><i class="fa fa-fw fa-file"></i> Blank Page</a>
+		                    </li>
+		                </ul>
+		            </div>
+		        </div>
+	        </nav>
+        	{% endblock %}
+        
+			{% for flashMessage in app.session.flashbag.get('notice') %}
+			<div class="flash-notice">
+			    {{ flashMessage }}
+			</div>
+			{% endfor %}
+			
+			{% for flashMessage in app.session.flashbag.get('error') %}
+			<div class="flash-error">
+			    {{ flashMessage }}
+			</div>
+			{% endfor %}
+			<div id="page-wrapper">
+        	{% block body %}
+        
+        	{% endblock %}
+        	</div>
+		</div>
+    </body>
+</html>

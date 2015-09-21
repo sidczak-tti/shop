@@ -1,0 +1,115 @@
+{% extends 'ApplicationShopAdminBundle::layout.html.twig' %}
+
+{% block title %}Start{% endblock %}
+
+{% block stylesheets %}{% endblock %}
+
+{% block javascripts %}{% endblock %}
+
+{% form_theme edit_form _self %}
+ 
+{% block form_errors %}
+{% spaceless %}
+    {% if errors|length > 0 %}
+        {% for error in errors %}
+            <small class="help-block">{{ error.messageTemplate|trans(error.messageParameters, 'validators') }}</small>
+        {% endfor %}
+    {% endif %}
+{% endspaceless %}
+{% endblock form_errors %}
+
+{% block choice_widget_expanded %}
+{% spaceless %}
+    <div {{ block('widget_container_attributes') }} class="my-form-choices">
+    {% for child in form %}
+        {{ form_widget(child) }}
+    {% endfor %}
+    </div>
+{% endspaceless %}
+{% endblock choice_widget_expanded %}
+
+{% block checkbox_widget %}
+{% spaceless %}
+    <div class="checkbox">
+        <label for="{{ id }}"><input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />{{ label|trans({}, translation_domain) }}</label>
+    </div>
+{% endspaceless %}
+{% endblock checkbox_widget %}
+
+{% block radio_widget %}
+{% spaceless %}
+    <div class="radio">
+        <label for="{{ id }}"><input type="radio" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />{{ label|trans({}, translation_domain) }}</label>
+    </div>
+{% endspaceless %}
+{% endblock radio_widget %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="page-header">Category edit</h1>
+        </div>  
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            {% if entity.image is not empty %} 
+                <img class="img-responsive img-center" src="{{ asset('bundles/applicationshop/images/category/') }}{{ entity.image }}" alt="{{ entity.title|raw }}">
+            {% endif %}
+        </div>
+        <div class="col-md-6">
+
+		{# {{ form(edit_form) }} #}
+        {{ form_start(edit_form, {'attr': {'novalidate': 'novalidate'}}) }}
+
+            {{ form_errors(edit_form) }}
+            
+            <div class="form-group {% if form_errors(edit_form.title) %} has-error {% endif %}">
+                {{ form_label(edit_form.title) }}
+                {{ form_widget(edit_form.title, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(edit_form.title) }}
+            </div>
+            <div class="form-group {% if form_errors(edit_form.description) %} has-error {% endif %}">
+                {{ form_label(edit_form.description) }}
+                {{ form_widget(edit_form.description, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(edit_form.description) }}
+            </div>
+            {#
+            <div class="form-group {% if form_errors(edit_form.image) %} has-error {% endif %}">
+                {{ form_label(edit_form.image) }}
+                {{ form_widget(edit_form.image, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(edit_form.image) }}
+            </div>
+            #}
+            <div class="form-group {% if form_errors(edit_form.file) %} has-error {% endif %}">
+                {{ form_label(edit_form.file) }} *
+                {{ form_widget(edit_form.file) }}
+                {{ form_errors(edit_form.file) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(edit_form.is_active) }}
+                {{ form_widget(edit_form.is_active) }}
+                {{ form_errors(edit_form.is_active) }}
+            </div>
+            <div class="form-group {% if form_errors(edit_form.created_at) %} has-error {% endif %}">
+                {{ form_label(edit_form.created_at) }}
+                {{ form_widget(edit_form.created_at, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(edit_form.created_at) }}
+            </div>
+            <div class="form-group {% if form_errors(edit_form.updated_at) %} has-error {% endif %}">
+                {{ form_label(edit_form.updated_at) }}
+                {{ form_widget(edit_form.updated_at, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(edit_form.updated_at) }}
+            </div>
+            <div class="form-group">
+                {{ form_widget(edit_form.submit, { 'attr': {'class': 'btn btn-default'} }) }}
+                <a class="btn btn-default" href="{{ path('application_admin_category') }}">Back to the list</a>
+                <a class="btn btn-danger" href="{{ path('application_admin_category_remove', { 'id': entity.id }) }}" onclick="if(!confirm('{% trans %}Are you sure?{% endtrans %}')) { return false; }">Delete</a>
+            </div>
+
+        {{ form_end(edit_form) }}
+
+        </div>
+    </div>
+</div>
+{% endblock %}

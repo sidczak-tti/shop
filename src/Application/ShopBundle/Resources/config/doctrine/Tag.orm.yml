@@ -1,0 +1,21 @@
+# src/Application/ShopBundle/Resources/config/doctrine/Tag.orm.yml
+Application\ShopBundle\Entity\Tag:
+  type: entity
+  #repositoryClass: Application\ShopBundle\Repository\TagRepository
+  table: tag
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    title:
+      type: string
+      length: 100
+    description:
+      type: string
+      length: 255
+  manyToMany:
+    products:
+      targetEntity: Product
+      mappedBy: tags
+      #cascade: [ persist ]

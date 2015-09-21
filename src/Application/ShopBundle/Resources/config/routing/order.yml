@@ -1,0 +1,7 @@
+application_order_cart:
+    path:     /cart
+    defaults: { _controller: "ApplicationShopBundle:Order:cart" }
+    
+application_order_checkout:
+    path:     /checkout
+    defaults: { _controller: "ApplicationShopBundle:Order:checkout" }

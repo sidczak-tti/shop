@@ -1,0 +1,32 @@
+application_product:
+    path:     /
+    defaults: { _controller: "ApplicationShopBundle:Product:index" }
+
+application_product_show:
+    path:     /{id}/{title}
+    defaults: { _controller: "ApplicationShopBundle:Product:show" }
+    requirements:
+        id:  \d+
+
+application_product_new:
+    path:     /new
+    defaults: { _controller: "ApplicationShopBundle:Product:new" }
+
+application_product_create:
+    path:     /create
+    defaults: { _controller: "ApplicationShopBundle:Product:create" }
+    requirements: { _method: post }
+
+application_product_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "ApplicationShopBundle:Product:edit" }
+
+application_product_update:
+    path:     /{id}/update
+    defaults: { _controller: "ApplicationShopBundle:Product:update" }
+    requirements: { _method: post|put }
+
+application_product_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "ApplicationShopBundle:Product:delete" }
+    requirements: { _method: post|delete }

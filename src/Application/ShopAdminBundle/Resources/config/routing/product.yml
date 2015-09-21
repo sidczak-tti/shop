@@ -1,0 +1,42 @@
+application_admin_product:
+    path:     /index/{page}/{sort_col}-{sort_type}
+    defaults: { _controller: "ApplicationShopAdminBundle:Product:index", page: 1, sort_col: null, sort_type: null }
+
+application_admin_product_show:
+    path:     /{id}/show
+    defaults: { _controller: "ApplicationShopAdminBundle:Product:show" }
+
+application_admin_product_new:
+    path:     /new
+    defaults: { _controller: "ApplicationShopAdminBundle:Product:new" }
+
+application_admin_product_create:
+    path:     /create
+    defaults: { _controller: "ApplicationShopAdminBundle:Product:create" }
+    requirements: { _method: post }
+
+application_admin_product_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "ApplicationShopAdminBundle:Product:edit" }
+
+application_admin_product_update:
+    path:     /{id}/update
+    defaults: { _controller: "ApplicationShopAdminBundle:Product:update" }
+    requirements: { _method: post|put }
+
+application_admin_product_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "ApplicationShopAdminBundle:Product:delete" }
+    requirements: { _method: post|delete }
+    
+application_admin_product_status:
+    path:     /{id}/status
+    defaults: { _controller: "ApplicationShopAdminBundle:Product:status" }
+    
+application_admin_product_remove:
+    path:     /{id}/remove
+    defaults: { _controller: "ApplicationShopAdminBundle:Product:remove" }
+
+application_admin_product_remove-image:
+    path:     /{id}/{img}/remove-image
+    defaults: { _controller: "ApplicationShopAdminBundle:Product:removeImage" }

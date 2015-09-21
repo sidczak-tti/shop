@@ -1,0 +1,137 @@
+{% extends 'ApplicationShopAdminBundle::layout.html.twig' %}
+
+{% block title %}Start{% endblock %}
+
+{% block stylesheets %}{% endblock %}
+
+{% block javascripts %}{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+    		<h1 class="page-header">Product list</h1>
+    		
+			<div class="table-responsive">
+		    <table class="table table-striped table-hover">
+		        <thead>
+		            <tr>
+		                <th>Id</th>
+		                <th>Category</th>
+		                <th>Image</th>
+                        <th>
+                        {% if sort_col is empty or sort_col != 'title' %}
+                            <i class="pull-right fa fa-sort"></i>
+                            <a href="{{ path('application_admin_product', { 'sort_col': 'title', 'sort_type': 'ASC' }) }}">Title</a>
+                        {% else %}
+                            <i class="pull-right fa {{ sort_type == 'ASC' ? 'fa-sort-asc' : 'fa-sort-desc' }}"></i>
+                            <a href="{{ path('application_admin_product', { 'sort_col': 'title', 'sort_type': sort_type == 'ASC' ? 'DESC' : 'ASC' }) }}">Title</a>
+                        {% endif %}
+                        </th>
+                        <th>
+                        {% if sort_col is empty or sort_col != 'code' %}
+                            <i class="pull-right fa fa-sort"></i>
+                            <a href="{{ path('application_admin_product', { 'sort_col': 'code', 'sort_type': 'ASC' }) }}">Code</a>
+                        {% else %}
+                            <i class="pull-right fa {{ sort_type == 'ASC' ? 'fa-sort-asc' : 'fa-sort-desc' }}"></i>
+                            <a href="{{ path('application_admin_product', { 'sort_col': 'code', 'sort_type': sort_type == 'ASC' ? 'DESC' : 'ASC' }) }}">Code</a>
+                        {% endif %}
+                        </th>
+                        <th>
+                        {% if sort_col is empty or sort_col != 'price' %}
+                            <i class="pull-right fa fa-sort"></i>
+                            <a href="{{ path('application_admin_product', { 'sort_col': 'price', 'sort_type': 'ASC' }) }}">Price</a>
+                        {% else %}
+                            <i class="pull-right fa {{ sort_type == 'ASC' ? 'fa-sort-asc' : 'fa-sort-desc' }}"></i>
+                            <a href="{{ path('application_admin_product', { 'sort_col': 'price', 'sort_type': sort_type == 'ASC' ? 'DESC' : 'ASC' } ) }}">Price</a>
+                        {% endif %}
+                        </th>
+		                <th>Pricepromotion</th>
+		                <th>Amount</th>
+		                <th>Is active</th>
+		                <th>Created at</th>
+		                <th>Updated at</th>
+		                <th>Actions</th>
+		            </tr>
+		        </thead>
+		        <tbody>
+		        {% for key, entity in entities %}
+		            <tr class="{{ cycle(['odd', 'even'], key) }}">
+		                <td>{{ loop.index }}</td>
+		                <td>{{ entity.category }}</td>
+		                <td>
+					    {% if entity.images is empty %}		    
+							No image
+						{% else %}
+							{% for image in entity.images|slice(0,1) %}
+								{# {{ image.image }} #}
+								<img width="40px" class="img-responsive img-center" src="{{ asset('bundles/applicationshop/images/product/') }}{{ image.image }}" alt="{{ entity.title|raw }}">
+						    {% endfor %}
+						{% endif %}
+		                </td>
+		                <td><a href="{{ path('application_admin_product_show', { 'id': entity.id }) }}">{{ entity.title|raw }}</a></td>
+		                <td>{{ entity.code }}</td>
+		                <td>{{ entity.price }}</td>
+		                <td>{{ entity.pricePromotion }}</td>
+		                <td>{{ entity.amount }}</td>
+		                <td>
+		        			{# {{ entity.isActive }} #}
+		                
+		                	{% if entity.isActive %}
+		                		<a class="btn btn-success btn-xs" href="{{ path('application_admin_product_status', { 'id': entity.id }) }}"><i class="fa fa-fw fa-check"></i></a>
+		                	{% else %}
+		                		<a class="btn btn-danger btn-xs" href="{{ path('application_admin_product_status', { 'id': entity.id }) }}"><i class="fa fa-fw fa-close"></i></a>
+		                	{% endif %}
+		                
+		                </td>
+		                <td>{% if entity.createdAt %}{{ entity.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+		                <td>{% if entity.updatedAt %}{{ entity.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+		                <td>
+		                    <a class="btn btn-primary btn-xs" href="{{ path('application_admin_product_show', { 'id': entity.id }) }}"><i class="fa fa-fw fa-file-text-o"></i>show</a>
+		                    <a class="btn btn-primary btn-xs" href="{{ path('application_admin_product_edit', { 'id': entity.id }) }}"><i class="fa fa-fw fa-pencil"></i>edit</a>
+					    	<a class="btn btn-danger btn-xs" href="{{ path('application_admin_product_remove', { 'id': entity.id }) }}" onclick="if(!confirm('{% trans %}Are you sure?{% endtrans %}')) { return false; }"><i class="fa fa-fw fa-close"></i>delete</a>
+		                </td>
+		            </tr>
+		        {% endfor %}
+		        </tbody>
+		    </table>
+		    </div>
+
+		    <a class="btn btn-default" href="{{ path('application_admin_product_new') }}">Create a new entry</a>
+    
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-6">
+            <p><strong>{{ total_products }}</strong> products
+                {% if last_page > 1 %}
+                    - page <strong>{{ current_page }}/{{ last_page }}</strong>
+                {% endif %}
+            </p>
+        </div>
+        {% if last_page > 1 %}
+        <div class="col-md-6">
+            <div class="text-right">
+                <ul class="pagination">
+                  <li><a href="{{ path('application_admin_product', { 'page': 1 }) }}">&laquo;</a></li>
+                  <li><a href="{{ path('application_admin_product', { 'page': previous_page }) }}">&lsaquo;</a></li>
+
+                  {% for page in 1..last_page %}
+                    {% if page == current_page %}
+                      <li class="active"><a href="#">{{ page }}</a></li>
+                    {% else %}
+                      <li><a href="{{ path('application_admin_product', { 'page': page }) }}">{{ page }}</a></li>
+                    {% endif %}
+                  {% endfor %}
+                  
+                  <li><a href="{{ path('application_admin_product', { 'page': next_page }) }}">&rsaquo;</a></li>
+                  <li><a href="{{ path('application_admin_product', { 'page': last_page }) }}">&raquo;</a></li>
+                </ul>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+    
+</div>
+{% endblock %}

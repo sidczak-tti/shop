@@ -1,0 +1,22 @@
+# src/Application/ShopBundle/Resources/config/doctrine/Image.orm.yml
+Application\ShopBundle\Entity\Image:
+  type: entity
+  #repositoryClass: Application\ShopBundle\Repository\ImageRepository
+  table: image
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    image:
+      type: string
+      length: 255
+      nullable: true
+  manyToOne:
+    product:
+      targetEntity: Product
+      inversedBy: images
+      #cascade: [ persist ]
+      joinColumn:
+        name: product_id
+        referencedColumnName: id

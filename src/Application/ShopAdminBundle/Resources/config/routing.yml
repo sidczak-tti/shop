@@ -1,0 +1,29 @@
+application_shop_admin_category:
+    resource: "@ApplicationShopAdminBundle/Resources/config/routing/category.yml"
+    prefix:   /category
+
+application_shop_admin_product:
+    resource: "@ApplicationShopAdminBundle/Resources/config/routing/product.yml"
+    prefix:   /product
+
+#application_shop_admin_application_admin_product:
+#    resource: "@ApplicationShopAdminBundle/Resources/config/routing/product.yml"
+#    prefix:   /application_admin_product
+
+application_shop_admin_homepage:
+    path:  /
+    defaults: { _controller: ApplicationShopAdminBundle:Start:index }
+
+#application_shop_admin_homepage:
+#    path:     /hello/{name}
+#    defaults: { _controller: ApplicationShopAdminBundle:Default:index }
+
+application_shop_admin_login:
+    pattern:   /admin_login
+    defaults:  { _controller: ApplicationShopAdminBundle:Secured:login }
+
+application_shop_admin_login_check:
+    pattern:   /admin_login_check
+
+application_shop_admin_logout:
+    pattern:   /admin_logout

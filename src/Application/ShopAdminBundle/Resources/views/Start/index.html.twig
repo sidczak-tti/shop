@@ -1,0 +1,19 @@
+{% extends 'ApplicationShopAdminBundle::layout.html.twig' %}
+
+{% block title %}Start{% endblock %}
+
+{% block stylesheets %}{% endblock %}
+
+{% block javascripts %}{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="page-header">Start</h1>
+            <a href="{{ path('application_shop_admin_homepage') }}">Start</a>
+            <a href="{{ path('application_admin_product') }}">Produkts</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

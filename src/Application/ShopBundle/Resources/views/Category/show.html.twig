@@ -1,0 +1,88 @@
+{% extends 'ApplicationShopBundle::layout.html.twig' %}
+
+{% block title %}
+    Products in the {{ category.title }} category
+{% endblock %}
+
+{% block stylesheets %}{% endblock %}
+
+{% block javascripts %}{% endblock %}
+
+
+{% block body %}
+<div class="container">
+    <div class="row">    
+    	<div class="col-lg-12">
+    		<div class="page-header">
+    			<h2>{{ category.title }}</h2>
+    		</div>
+    		<ul class="breadcrumb">
+                <li><a href="{{ path('application_shop_start') }}">Start</a></li>
+                <li><a href="{{ path('application_product') }}">Produkts</a></li>
+                <li class="active">{{ category.title }}</li>
+            </ul>
+    	</div>
+    </div>
+    
+	{% if not category.activeproducts %}
+	<div class="row">
+	    <div class="col-lg-6">
+	    	<p>There is no product in this category.</p>
+	    </div>
+	</div>
+	{% endif %}
+    
+    <div class="row">
+        {% for entity in category.activeproducts %}
+        <div class="col-lg-6">
+        	<div class="row">
+        		<div class="col-sm-4">
+        			<img class="img-circle img-responsive img-center" src="{{ asset('bundles/applicationshop/images/140x140.png') }}" alt="{{ entity.title|raw }}">
+        		</div>
+        		<div class="col-sm-8">
+        			<h3>{{ entity.title|raw }}<br/><small>Code: {{ entity.code }}</small></h3>
+        			<h4>Price: {{ entity.price }} zł</h4>
+        			<p>{{ entity.description|raw }}</p>
+        			<p><a class="btn btn-default" href="{{ path('application_product_show', { 'id': entity.id, 'title': entity.titleslug }) }}" role="button">Show &raquo;</a></p>
+        		</div>
+        	</div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="row">
+    	<div class="col-md-12">
+        	<p><strong>{{ total_products }}</strong> products in this category
+        		{% if last_page > 1 %}
+            		- page <strong>{{ current_page }}/{{ last_page }}</strong>
+        		{% endif %}
+        	</p>
+    	</div>
+    </div>
+    {% if last_page > 1 %}
+    <div class="row">
+    	<div class="col-md-12">
+    	    <div class="text-center">
+				<ul class="pagination">
+				  <li><a href="{{ path('application_shop_category', { 'slug': category.slug, 'page': 1 }) }}">&lsaquo;</a></li>
+				  <li><a href="{{ path('application_shop_category', { 'slug': category.slug, 'page': previous_page }) }}">&laquo;</a></li>
+
+			      {% for page in 1..last_page %}
+			        {% if page == current_page %}
+			          <li class="active"><a href="#">{{ page }}</a></li>
+			        {% else %}
+			          <li><a href="{{ path('application_shop_category', { 'slug': category.slug, 'page': page }) }}">{{ page }}</a></li>
+			        {% endif %}
+			      {% endfor %}
+				  
+				  <li><a href="{{ path('application_shop_category', { 'slug': category.slug, 'page': next_page }) }}">&raquo;</a></li>
+				  <li><a href="{{ path('application_shop_category', { 'slug': category.slug, 'page': last_page }) }}">&rsaquo;</a></li>
+				</ul>
+    	    </div>
+    	</div>
+    </div>
+    {% endif %}
+
+    
+</div>	
+{% endblock %}

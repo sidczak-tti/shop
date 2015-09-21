@@ -1,0 +1,26 @@
+# src/Application/ShopAdminBundle/Resources/config/doctrine/User.orm.yml
+Application\ShopAdminBundle\Entity\User:
+  type: entity
+  #repositoryClass: Application\ShopAdminBundle\Repository\UserRepository
+  table: user
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    name:
+      type: string
+      length: 255
+    email:
+      type: string
+      length: 255
+      unique: true
+    created_at:
+      type: datetime
+  oneToMany:
+    transactions:
+      targetEntity: Transaction
+      mappedBy: user
+      cascade: [ remove ]
+  lifecycleCallbacks:
+    prePersist: [ setCreatedAtValue ]

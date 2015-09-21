@@ -1,0 +1,45 @@
+# src/Application/ShopBundle/Resources/config/doctrine/Transaction.orm.yml
+Application\ShopBundle\Entity\Transaction:
+  type: entity
+  #repositoryClass: Application\ShopBundle\Repository\TransactionRepository
+  table: transaction
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    shipping_address:
+      type: string
+      length: 255
+    billing_address:
+      type: string
+      length: 255
+    quantity:
+      type: integer
+    status:
+      type: integer
+    created_at:
+      type: datetime
+  manyToOne:
+    user:
+      targetEntity: User
+      inversedBy: transactions
+      #cascade: [ persist ]
+      joinColumn:
+        name: user_id
+        referencedColumnName: id
+  manyToMany:
+    products:
+      targetEntity: Product
+      inversedBy: transactions
+      #cascade: [ persist ]
+      joinTable:
+        name: product_transaction
+        joinColumns:
+          transaction_id:
+            referencedColumnName: id
+        inverseJoinColumns:
+          product_id:
+            referencedColumnName: id
+  lifecycleCallbacks:
+    prePersist: [ setCreatedAtValue ]

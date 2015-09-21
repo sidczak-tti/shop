@@ -1,0 +1,38 @@
+application_admin_category:
+    path:     /
+    defaults: { _controller: "ApplicationShopAdminBundle:Category:index" }
+
+application_admin_category_show:
+    path:     /{id}/show
+    defaults: { _controller: "ApplicationShopAdminBundle:Category:show" }
+
+application_admin_category_new:
+    path:     /new
+    defaults: { _controller: "ApplicationShopAdminBundle:Category:new" }
+
+application_admin_category_create:
+    path:     /create
+    defaults: { _controller: "ApplicationShopAdminBundle:Category:create" }
+    requirements: { _method: post }
+
+application_admin_category_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "ApplicationShopAdminBundle:Category:edit" }
+
+application_admin_category_update:
+    path:     /{id}/update
+    defaults: { _controller: "ApplicationShopAdminBundle:Category:update" }
+    requirements: { _method: post|put }
+
+application_admin_category_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "ApplicationShopAdminBundle:Category:delete" }
+    requirements: { _method: post|delete }
+    
+application_admin_category_status:
+    path:     /{id}/status
+    defaults: { _controller: "ApplicationShopAdminBundle:Category:status" }
+    
+application_admin_category_remove:
+    path:     /{id}/remove
+    defaults: { _controller: "ApplicationShopAdminBundle:Category:remove" }

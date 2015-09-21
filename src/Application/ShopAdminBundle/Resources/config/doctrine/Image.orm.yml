@@ -1,0 +1,24 @@
+# src/Application/ShopAdminBundle/Resources/config/doctrine/Image.orm.yml
+Application\ShopAdminBundle\Entity\Image:
+  type: entity
+  #repositoryClass: Application\ShopAdminBundle\Repository\ImageRepository
+  table: image
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    image:
+      type: string
+      length: 255
+      nullable: true
+  manyToOne:
+    product:
+      targetEntity: Product
+      inversedBy: images
+      #cascade: [ persist ]
+      joinColumn:
+        name: product_id
+        referencedColumnName: id
+  lifecycleCallbacks:
+    postRemove: [ removeUpload ]

@@ -1,0 +1,48 @@
+# src/Application/ShopAdminBundle/Resources/config/doctrine/Category.orm.yml
+Application\ShopAdminBundle\Entity\Category:
+  type: entity
+  #repositoryClass: Application\ShopAdminBundle\Repository\CategoryRepository
+  table: category
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    title:
+      type: string
+      length: 100
+    slug:
+      type: string
+      length: 255
+      unique: true
+    description:
+      type: string
+      length: 255
+    image:
+      type: string
+      length: 100
+    is_active:
+      type: boolean
+      nullable: true
+      default: 0
+    created_at:
+      type: datetime
+    updated_at:
+      type: datetime
+      nullable: true
+  oneToMany:
+    products:
+      targetEntity: Product
+      mappedBy: category
+      cascade: [ remove ]
+#  manyToMany:
+#    products:
+#      targetEntity: Product
+#      mappedBy: categories
+#      #cascade: [ persist ]
+  lifecycleCallbacks:
+    prePersist: [ preUpload, setCreatedAtValue, setSlugValue ] 
+    preUpdate: [ preUpload, setUpdatedAtValue, setSlugValue ]
+    postPersist: [ upload ]
+    postUpdate: [ upload ]
+    postRemove: [ removeUpload ]
