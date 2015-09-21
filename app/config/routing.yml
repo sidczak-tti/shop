@@ -1,0 +1,8 @@
+application_shop_admin:
+    resource: "@ApplicationShopAdminBundle/Resources/config/routing.yml"
+    prefix:   /dashboard
+
+application_shop:
+    resource: "@ApplicationShopBundle/Resources/config/routing.yml"
+    prefix:   /
+
