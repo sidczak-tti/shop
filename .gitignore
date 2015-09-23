@@ -6,3 +6,5 @@
 !app/logs/.gitkeep
 /vendor/
 /composer.phar
+/nbproject/
+/nbproject/private/
