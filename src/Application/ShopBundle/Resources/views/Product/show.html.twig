@@ -28,9 +28,20 @@
 	    	<div class="product-header">
 	    		<h2>{{ entity.title|raw }}<br/><small>{{ entity.code }}</small></h2>
 	    		<h4>Price: {{ entity.price }} zł</h4>
+                        <!--<p>
+                            <a class="btn btn-sm btn-default" href="https://twitter.com/intent/tweet?url=http%3A//shop.localhost{{ path('application_product_show', { 'id': entity.id, 'title': entity.titleslug }) }}/&amp;text={{ entity.title|raw }}" target="_blank" title="Tweet this on Twitter"><i class="fa fa-fw fa-twitter"></i> Tweet</a>
+                            <a class="btn btn-sm btn-default" href="https://facebook.com/sharer.php?u=http%3A//shop.localhost{{ path('application_product_show', { 'id': entity.id, 'title': entity.titleslug }) }}/&amp;t={{ entity.title|raw }}" target="_blank" title="Share this on Facebook"><i class="fa fa-fw fa-facebook"></i> Share</a>
+                            <a class="btn btn-sm btn-default" href="https://plus.google.com/share?url=http%3A//shop.localhost{{ path('application_product_show', { 'id': entity.id, 'title': entity.titleslug }) }}" target="_blank" title="Post this to Google+"><i class="fa fa-fw fa-google-plus"></i> Share</a>
+                        </p>-->
+                        <p>
+                            <a class="btn btn-sm btn-default" href="https://twitter.com/intent/tweet?url={{ app.request.getUri }}&text={{ entity.title|raw }}" target="_blank" title="Tweet this on Twitter"><i class="fa fa-fw fa-twitter"></i> Tweet</a>
+                            <a class="btn btn-sm btn-default" href="https://facebook.com/sharer.php?u={{ app.request.getUri }}&t={{ entity.title|raw }}" target="_blank" title="Share this on Facebook"><i class="fa fa-fw fa-facebook"></i> Share</a>
+                            <a class="btn btn-sm btn-default" href="https://plus.google.com/share?url={{ app.request.getUri }}" target="_blank" title="Post this to Google+"><i class="fa fa-fw fa-google-plus"></i> Share</a>
+                        </p>
 	    	</div>
 	    	<p>{{ entity.description|raw }}</p>
 	    	<p>{{ entity.descriptionfull|raw }}</p>
+
 	    	<p><a class="btn btn-default" href="{{ path('application_product') }}" role="button">Back to the list</a></p>
 	    </div>
 	</div>
