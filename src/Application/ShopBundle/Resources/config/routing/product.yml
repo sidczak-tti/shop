@@ -3,7 +3,7 @@ application_product:
     defaults: { _controller: "ApplicationShopBundle:Product:index" }
 
 application_product_show:
-    path:     /{id}/{title}
+    path:     /{id}/{title}/show
     defaults: { _controller: "ApplicationShopBundle:Product:show" }
     requirements:
         id:  \d+
