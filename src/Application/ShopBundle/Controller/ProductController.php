@@ -249,4 +249,90 @@ class ProductController extends Controller
             ->getForm()
         ;
     }
+    
+    public function addCartAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('ApplicationShopBundle:Product')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Product entity.');
+        }
+        
+        $session = $this->getRequest()->getSession();
+ 
+	$products = $session->get('product_cart', array());
+	
+        $product = array(
+            'id' => $entity->getId(), 
+            'title' => $entity->getTitle(), 
+            'titleslug' => $entity->getTitleSlug(),
+            'price' => $entity->getPrice(),
+            'quantity' => 1,
+            'subtotal' => $entity->getPrice(),
+        );
+
+        $key_product = null;
+        $key_cart = null;
+        
+        foreach($products as $key => $val) {
+            if ($val['id'] == $id) {
+                $key_product = $val['id'];
+                $key_cart = $key;
+            }
+        }
+        
+        if (!$key_product) {
+            //echo 'Dodano nowy produkt do koszyka';
+            array_unshift($products, $product);
+            $session->set('product_cart', $products);
+            //var_dump($products);
+            //exit;
+        } else {
+            $products[$key_cart]['quantity']++;
+            $products[$key_cart]['subtotal'] = $products[$key_cart]['quantity'] * $products[$key_cart]['price'];
+            $session->set('product_cart', $products);
+            //var_dump($products);
+            //exit;
+        }
+        
+        return $this->redirect($this->generateUrl('application_order_cart'));
+    }
+    
+    public function removeCartAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('ApplicationShopBundle:Product')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Product entity.');
+        }
+        
+        $session = $this->getRequest()->getSession();
+ 
+	$products = $session->get('product_cart', array());
+
+        $key_cart = null;
+        
+        foreach($products as $key => $val) {
+            if ($val['id'] == $id) {
+                $key_cart = $key;
+            }
+        }
+        
+        if (isset($key_cart)) {
+            unset($products[$key_cart]);
+            $session->set('product_cart', $products);
+        }
+        
+        if (empty($products)) {
+            //$session->invalidate('product_cart');
+            $session->remove('product_cart');
+        }
+        
+        return $this->redirect($this->generateUrl('application_order_cart'));
+    }
+
 }

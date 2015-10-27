@@ -30,3 +30,11 @@ application_product_delete:
     path:     /{id}/delete
     defaults: { _controller: "ApplicationShopBundle:Product:delete" }
     requirements: { _method: post|delete }
+    
+application_product_add-cart:
+    path:     /{id}/add-cart
+    defaults: { _controller: "ApplicationShopBundle:Product:addCart" }
+    
+application_product_remove-cart:
+    path:     /{id}/remove-cart
+    defaults: { _controller: "ApplicationShopBundle:Product:removeCart" }

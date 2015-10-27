@@ -42,7 +42,10 @@
 	    	<p>{{ entity.description|raw }}</p>
 	    	<p>{{ entity.descriptionfull|raw }}</p>
 
-	    	<p><a class="btn btn-default" href="{{ path('application_product') }}" role="button">Back to the list</a></p>
+	    	<p>
+                    <a class="btn btn-primary" href="{{ path('application_product_add-cart', { 'id': entity.id }) }}" role="button"><i class="fa fa-cart-plus"></i> Add to cart</a>
+                    <a class="btn btn-default" href="{{ path('application_product') }}" role="button">Back to the list</a>
+                </p>
 	    </div>
 	</div>
 </div>
