@@ -92,20 +92,22 @@
 	    		</tr>
                     </thead>
                     <tbody>
+                    {% set subtotal_cart = null %}
                     {% for product in app.session.get('product_cart') %}
                     <tr>
                         <td><a href="{{ path('application_product_show', { 'id': product.id, 'title': product.titleslug }) }}">{{ product.title|raw }}</a></td>
                         <td>{{ product.quantity }}</td>
-                        <td>{{ product.price }} zł</td>
-                        <td>{{ product.subtotal }} zł</td>
+                        <td>{{ product.price|number_format(2, '.', ',') }} zł</td>
+                        <td>{{ product.subtotal|number_format(2, '.', ',') }} zł</td>
                         <td class="text-right"><a class="btn btn-default btn-sm" href="{{ path('application_product_remove-cart', { 'id': product.id }) }}">Remove</a></td>
+                        {% set subtotal_cart = subtotal_cart + product.subtotal %}
                     </tr>
                     {% endfor %}
                     </tbody>
                     <tfoot>
                         <tr class="success">
                             <th colspan="3">Subtotal</th>
-                            <th colspan="2">xxx</th>
+                            <th colspan="2"> {{ subtotal_cart|number_format(2, '.', ',') }} zł</th>
 	    		</tr>
                     </tfoot>
                 </table>
