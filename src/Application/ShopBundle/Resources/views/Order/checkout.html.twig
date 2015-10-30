@@ -1,0 +1,21 @@
+{% extends 'ApplicationShopBundle::layout.html.twig' %}
+
+{% block title %}Cart{% endblock %}
+{% block stylesheets %}{% endblock %}
+{% block javascripts %}{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">    
+    	<div class="col-lg-12">
+            <div class="page-header">
+                <h2>Checkout</h2>
+            </div>
+            <ul class="breadcrumb">
+                <li><a href="{{ path('application_shop_start') }}">Start</a></li>
+                <li class="active">Checkout</li>
+            </ul>
+    	</div>
+    </div>
+</div>
+{% endblock %}
