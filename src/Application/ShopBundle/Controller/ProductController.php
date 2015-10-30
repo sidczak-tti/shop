@@ -302,14 +302,6 @@ class ProductController extends Controller
     
     public function removeCartAction($id)
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('ApplicationShopBundle:Product')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Product entity.');
-        }
-        
         $session = $this->getRequest()->getSession();
  
 	$products = $session->get('product_cart', array());
@@ -331,6 +323,51 @@ class ProductController extends Controller
             //$session->invalidate('product_cart');
             $session->remove('product_cart');
         }
+        
+        return $this->redirect($this->generateUrl('application_order_cart'));
+    }
+    
+    public function updateCartAction()
+    {
+        $product_quantities = $this->getRequest()->get('product_quantities');
+        
+        $session = $this->getRequest()->getSession();
+        
+	$products = $session->get('product_cart', array());
+        
+        foreach($products as $key => $val) {
+
+            if ($products[$key]['id'] == key($product_quantities['id']) && 
+                    $product_quantities['id'][$val['id']] === '0') {
+                
+                unset($products[$key]);
+                
+            } else if ($products[$key]['id'] == key($product_quantities['id']) && 
+                    preg_match('/^[0-9]+$/', $product_quantities['id'][$val['id']])) {
+                
+                $products[$key]['quantity'] = abs($product_quantities['id'][$val['id']]);
+                $products[$key]['subtotal'] = $products[$key]['quantity'] * $products[$key]['price'];
+                
+            }
+
+            next($product_quantities['id']);
+            
+            /*
+            if (in_array(key($product_quantities['id']), $products[$key]) &&
+                    preg_match('/^[0-9]+$/', $product_quantities['id'][$val['id']])) {
+                
+            }
+            next($product_quantities['id']);*/
+            /*
+            if (preg_match('/^[0-9]+$/', $product_quantities['id'][$val['id']])) {
+                $products[$key]['quantity'] = $product_quantities['id'][$val['id']];
+                $products[$key]['subtotal'] = $products[$key]['quantity'] * $products[$key]['price'];
+                
+                $session->set('product_cart', $products);
+            }*/
+        }
+        
+        $session->set('product_cart', $products);
         
         return $this->redirect($this->generateUrl('application_order_cart'));
     }

@@ -38,3 +38,8 @@ application_product_add-cart:
 application_product_remove-cart:
     path:     /{id}/remove-cart
     defaults: { _controller: "ApplicationShopBundle:Product:removeCart" }
+    
+application_product_update-cart:
+    path:     /update-cart
+    defaults: { _controller: "ApplicationShopBundle:Product:updateCart" }
+    requirements: { _method: post }
