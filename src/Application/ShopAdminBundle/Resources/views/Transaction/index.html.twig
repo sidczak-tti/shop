@@ -1,0 +1,49 @@
+{% extends 'ApplicationShopAdminBundle::layout.html.twig' %}
+
+{% block title %}Start{% endblock %}
+
+{% block stylesheets %}{% endblock %}
+
+{% block javascripts %}{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="page-header">Transaction list</h1>
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Shipping address</th>
+                                <th>Billing address</th>
+                                <th>Quantity</th>
+                                <th>Status</th>
+                                <th>Created at</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for entity in entities %}
+                            <tr>
+                                <td><a href="{{ path('application_admin_transaction_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                                <td>{{ entity.shippingaddress }}</td>
+                                <td>{{ entity.billingaddress }}</td>
+                                <td>{{ entity.quantity }}</td>
+                                <td>{{ entity.status }}</td>
+                                <td>{% if entity.createdat %}{{ entity.createdat|date('Y-m-d H:i:s') }}{% endif %}</td>
+                                <td>
+                                    <a class="btn btn-primary btn-xs" href="{{ path('application_admin_transaction_show', { 'id': entity.id }) }}"><i class="fa fa-fw fa-file-text-o"></i>show</a>
+                                    <a class="btn btn-primary btn-xs" href="{{ path('application_admin_transaction_edit', { 'id': entity.id }) }}"><i class="fa fa-fw fa-file-text-o"></i>edit</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <a class="btn btn-default" href="{{ path('application_admin_transaction_new') }}">Create a new entry</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

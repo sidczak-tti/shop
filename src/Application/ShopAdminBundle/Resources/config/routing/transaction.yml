@@ -1,0 +1,30 @@
+application_admin_transaction:
+    path:     /
+    defaults: { _controller: "ApplicationShopAdminBundle:Transaction:index" }
+
+application_admin_transaction_show:
+    path:     /{id}/show
+    defaults: { _controller: "ApplicationShopAdminBundle:Transaction:show" }
+
+application_admin_transaction_new:
+    path:     /new
+    defaults: { _controller: "ApplicationShopAdminBundle:Transaction:new" }
+
+application_admin_transaction_create:
+    path:     /create
+    defaults: { _controller: "ApplicationShopAdminBundle:Transaction:create" }
+    requirements: { _method: post }
+
+application_admin_transaction_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "ApplicationShopAdminBundle:Transaction:edit" }
+
+application_admin_transaction_update:
+    path:     /{id}/update
+    defaults: { _controller: "ApplicationShopAdminBundle:Transaction:update" }
+    requirements: { _method: post|put }
+
+application_admin_transaction_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "ApplicationShopAdminBundle:Transaction:delete" }
+    requirements: { _method: post|delete }

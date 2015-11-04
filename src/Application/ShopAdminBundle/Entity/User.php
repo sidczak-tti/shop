@@ -161,4 +161,9 @@ class User
         // Add your code here
         $this->created_at = new \DateTime();
     }
+    
+    public function __toString()
+    {
+        return $this->getName();
+    }
 }

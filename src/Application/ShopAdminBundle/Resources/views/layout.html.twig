@@ -160,6 +160,11 @@
 		                    <li class="{{ app.request.get('_route') == 'application_admin_product' ? 'active' : '' }}">
 		                        <a href="{{ path('application_admin_product', { 'sort_col': 'reset', 'sort_type': 'reset' }) }}"><i class="fa fa-fw fa-table"></i> Products</a>
 		                    </li>
+                                    {% if is_granted('ROLE_ADMIN') %}
+                                    <li class="{{ app.request.get('_route') == 'application_admin_transaction' ? 'active' : '' }}">
+		                        <a href="{{ path('application_admin_transaction', { 'sort_col': 'reset', 'sort_type': 'reset' }) }}"><i class="fa fa-fw fa-table"></i> Transactions</a>
+		                    </li>
+                                    {% endif %}
 		                    <li>
 		                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
 		                        <ul id="demo" class="nav collapse">
