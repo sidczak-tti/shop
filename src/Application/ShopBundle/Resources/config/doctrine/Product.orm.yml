@@ -49,7 +49,7 @@ Application\ShopBundle\Entity\Product:
       cascade: [ remove ]
     transactions:
       targetEntity: ProductTransaction
-      mappedBy: transaction
+      mappedBy: product
       #cascade: [ persist ]
       cascade: [ remove ]
   manyToOne:

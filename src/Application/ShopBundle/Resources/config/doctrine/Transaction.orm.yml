@@ -23,7 +23,7 @@ Application\ShopBundle\Entity\Transaction:
   oneToMany:
     products:
       targetEntity: ProductTransaction
-      mappedBy: product
+      mappedBy: transaction
       cascade: [ remove ]
   manyToOne:
     user:
