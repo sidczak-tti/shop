@@ -20,6 +20,11 @@ Application\ShopBundle\Entity\Transaction:
       type: integer
     created_at:
       type: datetime
+  oneToMany:
+    products:
+      targetEntity: ProductTransaction
+      mappedBy: product
+      cascade: [ remove ]
   manyToOne:
     user:
       targetEntity: User
@@ -28,18 +33,5 @@ Application\ShopBundle\Entity\Transaction:
       joinColumn:
         name: user_id
         referencedColumnName: id
-  manyToMany:
-    products:
-      targetEntity: Product
-      inversedBy: transactions
-      #cascade: [ persist ]
-      joinTable:
-        name: product_transaction
-        joinColumns:
-          transaction_id:
-            referencedColumnName: id
-        inverseJoinColumns:
-          product_id:
-            referencedColumnName: id
   lifecycleCallbacks:
     prePersist: [ setCreatedAtValue ]

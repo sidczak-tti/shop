@@ -47,6 +47,11 @@ Application\ShopAdminBundle\Entity\Product:
       targetEntity: Image
       mappedBy: product
       cascade: [ remove ]
+    transactions:
+      targetEntity: ProductTransaction
+      mappedBy: transaction
+      #cascade: [ persist ]
+      cascade: [ remove ]
   manyToOne:
     category:
       targetEntity: Category
@@ -80,10 +85,6 @@ Application\ShopAdminBundle\Entity\Product:
         inverseJoinColumns:
           tag_id:
             referencedColumnName: id
-    transactions:
-      targetEntity: Transaction
-      mappedBy: products
-      #cascade: [ persist ]
   lifecycleCallbacks:
     prePersist: [ preUpload, setCreatedAtValue ] 
     preUpdate: [ preUpload, setUpdatedAtValue ]

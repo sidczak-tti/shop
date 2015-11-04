@@ -1,0 +1,32 @@
+# src/Application/ShopBundle/Resources/config/doctrine/ProductTransaction.orm.yml
+Application\ShopBundle\Entity\ProductTransaction:
+  type: entity
+  #repositoryClass: Application\ShopBundle\Repository\ProductTransactionRepository
+  table: product_transaction
+#  id:
+#    product:
+#      associationKey: true
+#    transaction:
+#      associationKey: true
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    quantity:
+      type: integer
+  manyToOne:
+    product:
+      targetEntity: Product
+      inversedBy: transactions
+      #cascade: [ persist ]
+      joinColumn:
+        name: product_id
+        referencedColumnName: id
+    transaction:
+      targetEntity: Transaction
+      inversedBy: products
+      #cascade: [ persist ]
+      joinColumn:
+        name: transaction_id
+        referencedColumnName: id
