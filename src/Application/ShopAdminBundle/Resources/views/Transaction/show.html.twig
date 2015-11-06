@@ -17,25 +17,52 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-4">
+            <h3><i class="fa fa-globe"></i> Seller</h3>
+            <h4>Company name</h4>
+            <ul class="fa-ul">
+                <li>NIP: xxx-xxx-xxx</li>
+                <li><i class="fa-li fa fa-map-marker"></i>
+                    ul. Inżynierska 15/2<br/>
+                    80-150 Gdańsk<br/>
+                    Polska<br/>
+                </li>
+                <li><i class="fa-li fa fa-phone"></i> 000 000 000</li>
+                <li><i class="fa-li fa fa-link"></i> <a href="#">companyname.com.pl</a></li>
+                <li><i class="fa-li fa fa-envelope"></i> <a href="#">companyname@com.pl</a></li>
+            </ul>
+        </div>
+        <div class="col-md-4">
             <h3><i class="fa fa-home"></i> Billing address</h3>
-            <i class="fa fa-fw fa-user"></i> <a href="#">Jan Kowalski</a><br/>
-            <i class="fa fa-fw fa-envelope"></i> <a href="#">jan.kowalski@com.pl</a><br/>
-            <i class="fa fa-fw fa-map-marker"></i> ul. Inżynierska 15/2, 80-150 Gdańsk<br/>
-            <i class="fa fa-fw fa-phone"></i> 000 000 000<br/>
+            <ul class="fa-ul">
+                <li><i class="fa-li fa fa-user"></i> <a href="#">Jan Kowalski</a></li>
+                <li><i class="fa-li fa fa-envelope"></i> <a href="#">jan.kowalski@com.pl</a></li>
+                <li><i class="fa-li fa fa-map-marker"></i>
+                    ul. Inżynierska 15/2<br/>
+                    80-150 Gdańsk<br/>
+                    Polska<br/>
+                </li>
+                <li><i class="fa-li fa fa-phone"></i> 000 000 000</li>
+            </ul>
             {# {{ entity.billingaddress }} #}
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
             <h3><i class="fa fa-truck"></i> Shipping address</h3>
-            <i class="fa fa-fw fa-user"></i> Jan Kowalski<br/>
-            <i class="fa fa-fw fa-map-marker"></i> ul. Inżynierska 15/2, 80-150 Gdańsk<br/>
-            <i class="fa fa-fw fa-phone"></i> 000 000 000<br/>
+            <ul class="fa-ul">
+                <li><i class="fa-li fa fa-user"></i>Jan Kowalski</li>
+                <li><i class="fa-li fa fa-map-marker"></i>
+                    ul. Inżynierska 15/2<br/>
+                    80-150 Gdańsk<br/>
+                    Polska<br/>
+                </li>
+                <li><i class="fa-li fa fa-phone"></i> 000 000 000</li>
+            </ul>
             {# {{ entity.shippingaddress }} #}
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
-            <h3>Products information</h3>
+            <h3><i class="fa fa-barcode"></i> Products information</h3>
             <div class="table-responsive">
 	    	<table class="table table-striped table-hover">
                     <thead>
@@ -83,7 +110,11 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
+            <h3>Payment method</h3>
+            <h3>Shipping method</h3>
+        </div>
+        <div class="col-md-6">
             <h3>Summary</h3>
             <div class="table-responsive">
                 <table class="table">
@@ -93,12 +124,12 @@
                             <td>529.99 zł</td>
                         </tr>
                         <tr>
-                            <th>Shipping:</th> 
+                            <th>Shipping cost:</th> 
                             <td>529.99 zł</td>
                         </tr>
-                        <tr>
-                            <th>Total:</th> 
-                            <td>529.99 zł</td>
+                        <tr class="success">
+                            <th>Total cost:</th> 
+                            <th>529.99 zł</th>
                         </tr>
                     </tbody>
                 </table>

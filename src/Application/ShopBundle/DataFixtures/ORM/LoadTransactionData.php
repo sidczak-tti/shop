@@ -15,8 +15,8 @@ class LoadTransactionData extends AbstractFixture implements OrderedFixtureInter
     	$transaction1 = new Transaction();
     	$transaction1->setUser($em->merge($this->getReference('user-grzegorz')));
     	#$transaction1->addProduct($em->merge($this->getReference('product-asus_cp6130')));
-        $transaction1->setShippingAddress('ul. Andrykowskiego 4, 86-150 Osie');
         $transaction1->setBillingAddress('ul. Andrykowskiego 4, 86-150 Osie');
+        $transaction1->setShippingAddress('ul. Andrykowskiego 4, 86-150 Osie');
         $transaction1->setQuantity(1);
         $transaction1->setStatus(1);
         
@@ -24,8 +24,8 @@ class LoadTransactionData extends AbstractFixture implements OrderedFixtureInter
     	$transaction2->setUser($em->merge($this->getReference('user-stanislaw')));
     	#$transaction2->addProduct($em->merge($this->getReference('product-asus_cp6130')));
     	#$transaction2->addProduct($em->merge($this->getReference('product-samsung_series3')));
-        $transaction2->setShippingAddress('ul. Andrykowskiego 5, 86-150 Osie');
         $transaction2->setBillingAddress('ul. Andrykowskiego 5, 86-150 Osie');
+        $transaction2->setShippingAddress('ul. Andrykowskiego 5, 86-150 Osie');
         $transaction2->setQuantity(2);
         $transaction2->setStatus(1);
         
@@ -33,8 +33,8 @@ class LoadTransactionData extends AbstractFixture implements OrderedFixtureInter
     	$transaction3->setUser($em->merge($this->getReference('user-krzysztof')));
     	#$transaction3->addProduct($em->merge($this->getReference('product-asus_cp6130')));
     	#$transaction3->addProduct($em->merge($this->getReference('product-samsung_series3')));
-        $transaction3->setShippingAddress('ul. Andrykowskiego 6, 86-150 Osie');
         $transaction3->setBillingAddress('ul. Andrykowskiego 6, 86-150 Osie');
+        $transaction3->setShippingAddress('ul. Andrykowskiego 6, 86-150 Osie');
         $transaction3->setQuantity(2);
         $transaction3->setStatus(1);
         
