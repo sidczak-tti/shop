@@ -13,7 +13,6 @@
             <h1 class="page-header">Transaction {{ entity.id }} <small>({{ entity.createdat|date('Y-m-d H:i:s') }})</small>
                 <small class="pull-right">Status: Open {{ entity.status }}</small>
             </h1>
-            
         </div>
     </div>
     <div class="row">
@@ -28,34 +27,53 @@
                     Polska<br/>
                 </li>
                 <li><i class="fa-li fa fa-phone"></i> 000 000 000</li>
+                <li><i class="fa-li fa fa-fax"></i> (000) 000 000 000</li>
                 <li><i class="fa-li fa fa-link"></i> <a href="#">companyname.com.pl</a></li>
                 <li><i class="fa-li fa fa-envelope"></i> <a href="#">companyname@com.pl</a></li>
             </ul>
         </div>
         <div class="col-md-4">
             <h3><i class="fa fa-home"></i> Billing address</h3>
+            {# {% if entity.company %}
+            <h4>{{ entity.company }}</h4>
+            {% endif %}#}
             <ul class="fa-ul">
-                <li><i class="fa-li fa fa-user"></i> <a href="#">Jan Kowalski</a></li>
-                <li><i class="fa-li fa fa-envelope"></i> <a href="#">jan.kowalski@com.pl</a></li>
+                <li><i class="fa-li fa fa-user"></i> <a href="#">{{ entity.billingFirstname }} {{ entity.billingLastname }}</a></li>
+                <li><i class="fa-li fa fa-envelope"></i> <a href="mailto:{{ entity.email }}">{{ entity.email }}</a></li>
                 <li><i class="fa-li fa fa-map-marker"></i>
-                    ul. Inżynierska 15/2<br/>
-                    80-150 Gdańsk<br/>
-                    Polska<br/>
+                    {{ entity.billingAddress }}<br/>
+                    {% if entity.billingAddress2 %}
+                      {{ entity.billingAddress2 }}<br/>
+                    {% endif %}
+                    {{ entity.billingZipcode }} {{ entity.billingCity }}<br/>
+                    {{ entity.billingCountry }}<br/>
                 </li>
-                <li><i class="fa-li fa fa-phone"></i> 000 000 000</li>
+                {% if entity.billingPhone %}
+                  <li><i class="fa-li fa fa-phone"></i> {{ entity.billingPhone }}</li>
+                {% endif %}
+                {% if entity.billingFax %}
+                  <li><i class="fa-li fa fa-fax"></i> {{ entity.billingFax }}</li>
+                {% endif %}
             </ul>
-            {# {{ entity.billingaddress }} #}
         </div>
         <div class="col-md-4">
             <h3><i class="fa fa-truck"></i> Shipping address</h3>
             <ul class="fa-ul">
-                <li><i class="fa-li fa fa-user"></i>Jan Kowalski</li>
+                <li><i class="fa-li fa fa-user"></i>{{ entity.billingFirstname }} {{ entity.billingLastname }}</li>
                 <li><i class="fa-li fa fa-map-marker"></i>
-                    ul. Inżynierska 15/2<br/>
-                    80-150 Gdańsk<br/>
-                    Polska<br/>
+                    {{ entity.billingAddress }}<br/>
+                    {% if entity.billingAddress2 %}
+                      {{ entity.billingAddress2 }}<br/>
+                    {% endif %}
+                    {{ entity.billingZipcode }} {{ entity.billingCity }}<br/>
+                    {{ entity.billingCountry }}<br/>
                 </li>
-                <li><i class="fa-li fa fa-phone"></i> 000 000 000</li>
+                {% if entity.billingPhone %}
+                  <li><i class="fa-li fa fa-phone"></i> {{ entity.billingPhone }}</li>
+                {% endif %}
+                {% if entity.billingFax %}
+                  <li><i class="fa-li fa fa-fax"></i> {{ entity.billingFax }}</li>
+                {% endif %}
             </ul>
             {# {{ entity.shippingaddress }} #}
         </div>

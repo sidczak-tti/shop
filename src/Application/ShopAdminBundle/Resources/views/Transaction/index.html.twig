@@ -39,7 +39,7 @@
                                 </select>
                                 {# {{ entity.status }} #}
                             </td>
-                            <td><a href="mailto:anonymous@com.pl">@</a> Anonymous</td>
+                            <td><a href="mailto:{{ entity.email }}">@</a> Anonymous</td>
                             <td>000 000 000</td>
                             <td>{% if entity.createdat %}{{ entity.createdat|date('Y-m-d H:i:s') }}{% endif %}</td>
                             <td>{{ entity.quantity }}</td>

@@ -250,4 +250,284 @@ class Transaction
     {
         return $this->getShippingAddress();
     }
+    /**
+     * @var string
+     */
+    private $company;
+
+    /**
+     * @var string
+     */
+    private $email;
+
+    /**
+     * @var string
+     */
+    private $billing_firstname;
+
+    /**
+     * @var string
+     */
+    private $billing_lastname;
+
+    /**
+     * @var string
+     */
+    private $billing_phone;
+
+    /**
+     * @var string
+     */
+    private $billing_fax;
+
+    /**
+     * @var string
+     */
+    private $billing_address2;
+
+    /**
+     * @var string
+     */
+    private $billing_city;
+
+    /**
+     * @var string
+     */
+    private $billing_country;
+
+    /**
+     * @var string
+     */
+    private $billing_zipcode;
+
+
+    /**
+     * Set company
+     *
+     * @param string $company
+     * @return Transaction
+     */
+    public function setCompany($company)
+    {
+        $this->company = $company;
+
+        return $this;
+    }
+
+    /**
+     * Get company
+     *
+     * @return string 
+     */
+    public function getCompany()
+    {
+        return $this->company;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     * @return Transaction
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string 
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set billing_firstname
+     *
+     * @param string $billingFirstname
+     * @return Transaction
+     */
+    public function setBillingFirstname($billingFirstname)
+    {
+        $this->billing_firstname = $billingFirstname;
+
+        return $this;
+    }
+
+    /**
+     * Get billing_firstname
+     *
+     * @return string 
+     */
+    public function getBillingFirstname()
+    {
+        return $this->billing_firstname;
+    }
+
+    /**
+     * Set billing_lastname
+     *
+     * @param string $billingLastname
+     * @return Transaction
+     */
+    public function setBillingLastname($billingLastname)
+    {
+        $this->billing_lastname = $billingLastname;
+
+        return $this;
+    }
+
+    /**
+     * Get billing_lastname
+     *
+     * @return string 
+     */
+    public function getBillingLastname()
+    {
+        return $this->billing_lastname;
+    }
+
+    /**
+     * Set billing_phone
+     *
+     * @param string $billingPhone
+     * @return Transaction
+     */
+    public function setBillingPhone($billingPhone)
+    {
+        $this->billing_phone = $billingPhone;
+
+        return $this;
+    }
+
+    /**
+     * Get billing_phone
+     *
+     * @return string 
+     */
+    public function getBillingPhone()
+    {
+        return $this->billing_phone;
+    }
+
+    /**
+     * Set billing_fax
+     *
+     * @param string $billingFax
+     * @return Transaction
+     */
+    public function setBillingFax($billingFax)
+    {
+        $this->billing_fax = $billingFax;
+
+        return $this;
+    }
+
+    /**
+     * Get billing_fax
+     *
+     * @return string 
+     */
+    public function getBillingFax()
+    {
+        return $this->billing_fax;
+    }
+
+    /**
+     * Set billing_address2
+     *
+     * @param string $billingAddress2
+     * @return Transaction
+     */
+    public function setBillingAddress2($billingAddress2)
+    {
+        $this->billing_address2 = $billingAddress2;
+
+        return $this;
+    }
+
+    /**
+     * Get billing_address2
+     *
+     * @return string 
+     */
+    public function getBillingAddress2()
+    {
+        return $this->billing_address2;
+    }
+
+    /**
+     * Set billing_city
+     *
+     * @param string $billingCity
+     * @return Transaction
+     */
+    public function setBillingCity($billingCity)
+    {
+        $this->billing_city = $billingCity;
+
+        return $this;
+    }
+
+    /**
+     * Get billing_city
+     *
+     * @return string 
+     */
+    public function getBillingCity()
+    {
+        return $this->billing_city;
+    }
+
+    /**
+     * Set billing_country
+     *
+     * @param string $billingCountry
+     * @return Transaction
+     */
+    public function setBillingCountry($billingCountry)
+    {
+        $this->billing_country = $billingCountry;
+
+        return $this;
+    }
+
+    /**
+     * Get billing_country
+     *
+     * @return string 
+     */
+    public function getBillingCountry()
+    {
+        return $this->billing_country;
+    }
+
+    /**
+     * Set billing_zipcode
+     *
+     * @param string $billingZipcode
+     * @return Transaction
+     */
+    public function setBillingZipcode($billingZipcode)
+    {
+        $this->billing_zipcode = $billingZipcode;
+
+        return $this;
+    }
+
+    /**
+     * Get billing_zipcode
+     *
+     * @return string 
+     */
+    public function getBillingZipcode()
+    {
+        return $this->billing_zipcode;
+    }
 }

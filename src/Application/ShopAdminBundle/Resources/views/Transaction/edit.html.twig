@@ -1,16 +1,26 @@
-{% extends '::base.html.twig' %}
+{% extends 'ApplicationShopAdminBundle::layout.html.twig' %}
 
-{% block body -%}
-    <h1>Transaction edit</h1>
+{% block title %}Start{% endblock %}
 
-    {{ form(edit_form) }}
+{% block stylesheets %}{% endblock %}
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('application_admin_transaction') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+{% block javascripts %}{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="page-header">Transaction edit</h1>
+
+            {{ form(edit_form) }}
+
+            <a class="btn btn-default" href="{{ path('application_admin_transaction') }}">Back to the list</a>
+            
+            {{ form_start(delete_form, { 'attr': {'class': 'form-btn-inline'} }) }}   	
+              {{ form_widget(delete_form.submit, { 'attr': {'class': 'btn btn-danger'} }) }}
+            {{ form_end(delete_form) }}
+
+        </div>
+    </div>
+</div>
 {% endblock %}
