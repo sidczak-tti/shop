@@ -102,10 +102,41 @@ class TransactionController extends Controller
         }
 
         $deleteForm = $this->createDeleteForm($id);
+        
+        //$products = $entity->getProducts(); //powiązane produkty z tabeli product_transaction
 
+        $query = $em->createQuery(
+            'SELECT
+                p, pt
+            FROM 
+                ApplicationShopAdminBundle:Product p 
+            LEFT JOIN 
+                p.transactions pt 
+            LEFT JOIN 
+                pt.transaction t 
+            WHERE 
+                t.id = :transaction_id'
+        )->setParameter(':transaction_id', $id);
+        
+        $products = $query->getResult();
+
+        /*
+        $repository = $em->getRepository('ApplicationShopAdminBundle:Product');
+
+        $qb = $repository->createQueryBuilder('p')
+            ->leftJoin('p.transactions', 'pt')
+            ->leftJoin('pt.transaction', 't')
+            ->where('t.id = :transaction_id')
+            ->setParameter('transaction_id', $id);
+
+        $query = $qb->getQuery();
+        $products = $query->getResult();
+        */
+        
         return $this->render('ApplicationShopAdminBundle:Transaction:show.html.twig', array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),
+            'products'    => $products,
         ));
     }
 
