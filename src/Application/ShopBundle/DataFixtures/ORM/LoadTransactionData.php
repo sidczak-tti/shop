@@ -17,6 +17,7 @@ class LoadTransactionData extends AbstractFixture implements OrderedFixtureInter
     	#$transaction1->addProduct($em->merge($this->getReference('product-asus_cp6130')));
         $transaction1->setCompany('Energa SA');
         $transaction1->setEmail('energa@xx.com');
+        
         $transaction1->setBillingFirstname('Jan');
         $transaction1->setBillingLastname('Kowalski');
         $transaction1->setBillingPhone('xxx xx xx xx');
@@ -26,8 +27,18 @@ class LoadTransactionData extends AbstractFixture implements OrderedFixtureInter
         $transaction1->setBillingCity('Gdynia');
         $transaction1->setBillingCountry('Polska');
         $transaction1->setBillingZipcode('85-200');
-        $transaction1->setShippingAddress('ul. Andrykowskiego 4, 86-150 Osie');
+        $transaction1->setShippingFirstname('Jan');
+        $transaction1->setShippingLastname('Kowalski');
+        $transaction1->setShippingPhone('xxx xx xx xx');
+        $transaction1->setShippingFax('(xxx) xxx-xx-xx');
+        $transaction1->setShippingAddress('ul. Nowy świat 4');
+        $transaction1->setShippingCity('Gdynia');
+        $transaction1->setShippingCountry('Polska');
+        $transaction1->setShippingZipcode('85-200');
         $transaction1->setQuantity(1);
+        $transaction1->setPaymentMethod('Przelew bankowy');
+        $transaction1->setShippingCost(28);
+        $transaction1->setShippingMethod('Poczta Polska');
         $transaction1->setStatus(1);
         
         $transaction2 = new Transaction();
@@ -44,8 +55,18 @@ class LoadTransactionData extends AbstractFixture implements OrderedFixtureInter
         $transaction2->setBillingCity('Gdynia');
         $transaction2->setBillingCountry('Polska');
         $transaction2->setBillingZipcode('85-200');
-        $transaction2->setShippingAddress('ul. Andrykowskiego 5, 86-150 Osie');
+        $transaction2->setShippingFirstname('Jan');
+        $transaction2->setShippingLastname('Kowalski');
+        $transaction2->setShippingPhone('xxx xx xx xx');
+        $transaction2->setShippingFax('(xxx) xxx-xx-xx');
+        $transaction2->setShippingAddress('ul. Nowy świat 4');
+        $transaction2->setShippingCity('Gdynia');
+        $transaction2->setShippingCountry('Polska');
+        $transaction2->setShippingZipcode('85-200');
         $transaction2->setQuantity(2);
+        $transaction2->setPaymentMethod('Przelew bankowy');
+        $transaction2->setShippingCost(28);
+        $transaction2->setShippingMethod('Poczta Polska');
         $transaction2->setStatus(1);
         
         $transaction3 = new Transaction();
@@ -62,8 +83,18 @@ class LoadTransactionData extends AbstractFixture implements OrderedFixtureInter
         $transaction3->setBillingCity('Gdynia');
         $transaction3->setBillingCountry('Polska');
         $transaction3->setBillingZipcode('85-200');
-        $transaction3->setShippingAddress('ul. Andrykowskiego 6, 86-150 Osie');
+        $transaction3->setShippingFirstname('Jan');
+        $transaction3->setShippingLastname('Kowalski');
+        $transaction3->setShippingPhone('xxx xx xx xx');
+        $transaction3->setShippingFax('(xxx) xxx-xx-xx');
+        $transaction3->setShippingAddress('ul. Nowy świat 4');
+        $transaction3->setShippingCity('Gdynia');
+        $transaction3->setShippingCountry('Polska');
+        $transaction3->setShippingZipcode('85-200');
         $transaction3->setQuantity(2);
+        $transaction3->setPaymentMethod('Przelew bankowy');
+        $transaction3->setShippingCost(28);
+        $transaction3->setShippingMethod('Poczta Polska');
         $transaction3->setStatus(1);
         
         $em->persist($transaction1);

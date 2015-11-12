@@ -530,4 +530,312 @@ class Transaction
     {
         return $this->billing_zipcode;
     }
+    /**
+     * @var string
+     */
+    private $shipping_firstname;
+
+    /**
+     * @var string
+     */
+    private $shipping_lastname;
+
+    /**
+     * @var string
+     */
+    private $shipping_phone;
+
+    /**
+     * @var string
+     */
+    private $shipping_fax;
+
+    /**
+     * @var string
+     */
+    private $shipping_address2;
+
+    /**
+     * @var string
+     */
+    private $shipping_city;
+
+    /**
+     * @var string
+     */
+    private $shipping_country;
+
+    /**
+     * @var string
+     */
+    private $shipping_zipcode;
+
+    /**
+     * @var string
+     */
+    private $payment_method;
+
+    /**
+     * @var string
+     */
+    private $shipping_cost;
+
+    /**
+     * @var string
+     */
+    private $shipping_method;
+
+
+    /**
+     * Set shipping_firstname
+     *
+     * @param string $shippingFirstname
+     * @return Transaction
+     */
+    public function setShippingFirstname($shippingFirstname)
+    {
+        $this->shipping_firstname = $shippingFirstname;
+
+        return $this;
+    }
+
+    /**
+     * Get shipping_firstname
+     *
+     * @return string 
+     */
+    public function getShippingFirstname()
+    {
+        return $this->shipping_firstname;
+    }
+
+    /**
+     * Set shipping_lastname
+     *
+     * @param string $shippingLastname
+     * @return Transaction
+     */
+    public function setShippingLastname($shippingLastname)
+    {
+        $this->shipping_lastname = $shippingLastname;
+
+        return $this;
+    }
+
+    /**
+     * Get shipping_lastname
+     *
+     * @return string 
+     */
+    public function getShippingLastname()
+    {
+        return $this->shipping_lastname;
+    }
+
+    /**
+     * Set shipping_phone
+     *
+     * @param string $shippingPhone
+     * @return Transaction
+     */
+    public function setShippingPhone($shippingPhone)
+    {
+        $this->shipping_phone = $shippingPhone;
+
+        return $this;
+    }
+
+    /**
+     * Get shipping_phone
+     *
+     * @return string 
+     */
+    public function getShippingPhone()
+    {
+        return $this->shipping_phone;
+    }
+
+    /**
+     * Set shipping_fax
+     *
+     * @param string $shippingFax
+     * @return Transaction
+     */
+    public function setShippingFax($shippingFax)
+    {
+        $this->shipping_fax = $shippingFax;
+
+        return $this;
+    }
+
+    /**
+     * Get shipping_fax
+     *
+     * @return string 
+     */
+    public function getShippingFax()
+    {
+        return $this->shipping_fax;
+    }
+
+    /**
+     * Set shipping_address2
+     *
+     * @param string $shippingAddress2
+     * @return Transaction
+     */
+    public function setShippingAddress2($shippingAddress2)
+    {
+        $this->shipping_address2 = $shippingAddress2;
+
+        return $this;
+    }
+
+    /**
+     * Get shipping_address2
+     *
+     * @return string 
+     */
+    public function getShippingAddress2()
+    {
+        return $this->shipping_address2;
+    }
+
+    /**
+     * Set shipping_city
+     *
+     * @param string $shippingCity
+     * @return Transaction
+     */
+    public function setShippingCity($shippingCity)
+    {
+        $this->shipping_city = $shippingCity;
+
+        return $this;
+    }
+
+    /**
+     * Get shipping_city
+     *
+     * @return string 
+     */
+    public function getShippingCity()
+    {
+        return $this->shipping_city;
+    }
+
+    /**
+     * Set shipping_country
+     *
+     * @param string $shippingCountry
+     * @return Transaction
+     */
+    public function setShippingCountry($shippingCountry)
+    {
+        $this->shipping_country = $shippingCountry;
+
+        return $this;
+    }
+
+    /**
+     * Get shipping_country
+     *
+     * @return string 
+     */
+    public function getShippingCountry()
+    {
+        return $this->shipping_country;
+    }
+
+    /**
+     * Set shipping_zipcode
+     *
+     * @param string $shippingZipcode
+     * @return Transaction
+     */
+    public function setShippingZipcode($shippingZipcode)
+    {
+        $this->shipping_zipcode = $shippingZipcode;
+
+        return $this;
+    }
+
+    /**
+     * Get shipping_zipcode
+     *
+     * @return string 
+     */
+    public function getShippingZipcode()
+    {
+        return $this->shipping_zipcode;
+    }
+
+    /**
+     * Set payment_method
+     *
+     * @param string $paymentMethod
+     * @return Transaction
+     */
+    public function setPaymentMethod($paymentMethod)
+    {
+        $this->payment_method = $paymentMethod;
+
+        return $this;
+    }
+
+    /**
+     * Get payment_method
+     *
+     * @return string 
+     */
+    public function getPaymentMethod()
+    {
+        return $this->payment_method;
+    }
+
+    /**
+     * Set shipping_cost
+     *
+     * @param string $shippingCost
+     * @return Transaction
+     */
+    public function setShippingCost($shippingCost)
+    {
+        $this->shipping_cost = $shippingCost;
+
+        return $this;
+    }
+
+    /**
+     * Get shipping_cost
+     *
+     * @return string 
+     */
+    public function getShippingCost()
+    {
+        return $this->shipping_cost;
+    }
+
+    /**
+     * Set shipping_method
+     *
+     * @param string $shippingMethod
+     * @return Transaction
+     */
+    public function setShippingMethod($shippingMethod)
+    {
+        $this->shipping_method = $shippingMethod;
+
+        return $this;
+    }
+
+    /**
+     * Get shipping_method
+     *
+     * @return string 
+     */
+    public function getShippingMethod()
+    {
+        return $this->shipping_method;
+    }
 }

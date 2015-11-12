@@ -8,6 +8,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Application\ShopAdminBundle\Entity\Transaction;
 use Application\ShopAdminBundle\Form\TransactionType;
 
+use Application\ShopAdminBundle\Entity\ProductTransaction;
+use Application\ShopAdminBundle\Form\ProductTransactionType;
+
+use Application\ShopAdminBundle\Entity\Product;
+use Application\ShopAdminBundle\Form\ProductType;
+
 /**
  * Transaction controller.
  *
@@ -104,7 +110,7 @@ class TransactionController extends Controller
         $deleteForm = $this->createDeleteForm($id);
         
         //$products = $entity->getProducts(); //powiązane produkty z tabeli product_transaction
-
+        /*
         $query = $em->createQuery(
             'SELECT
                 p, pt
@@ -119,11 +125,12 @@ class TransactionController extends Controller
         )->setParameter(':transaction_id', $id);
         
         $products = $query->getResult();
-
-        /*
+        */
+        
         $repository = $em->getRepository('ApplicationShopAdminBundle:Product');
 
         $qb = $repository->createQueryBuilder('p')
+            ->add('select', 'p, pt, t')
             ->leftJoin('p.transactions', 'pt')
             ->leftJoin('pt.transaction', 't')
             ->where('t.id = :transaction_id')
@@ -131,7 +138,6 @@ class TransactionController extends Controller
 
         $query = $qb->getQuery();
         $products = $query->getResult();
-        */
         
         return $this->render('ApplicationShopAdminBundle:Transaction:show.html.twig', array(
             'entity'      => $entity,
