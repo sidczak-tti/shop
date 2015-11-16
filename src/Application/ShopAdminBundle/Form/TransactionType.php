@@ -20,7 +20,7 @@ class TransactionType extends AbstractType
             ->add('billing_firstname')
             ->add('billing_lastname')
             ->add('billing_phone')
-            ->add('billing_fax')    
+            ->add('billing_fax')
             ->add('billing_address')
             ->add('billing_address2')
             ->add('billing_city')
@@ -40,7 +40,10 @@ class TransactionType extends AbstractType
             ->add('shipping_cost')
             ->add('shipping_method')
             ->add('status')
-            ->add('created_at')
+            ->add('created_at', 'date', array(
+            	'widget' => 'single_text',
+            	'attr' => array('placeholder' => 'YYYY-MM-DD'),
+            ))
             ->add('user')
         ;
     }

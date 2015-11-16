@@ -4,6 +4,9 @@ namespace Application\ShopAdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Mapping\ClassMetadata;
+use Symfony\Component\Validator\Constraints\NotBlank;
+
 /**
  * Transaction
  */
@@ -837,5 +840,31 @@ class Transaction
     public function getShippingMethod()
     {
         return $this->shipping_method;
+    }
+    
+    public static function loadValidatorMetadata(ClassMetadata $metadata)
+    {
+        $metadata->addPropertyConstraint('email', new NotBlank());
+        
+        $metadata->addPropertyConstraint('billing_firstname', new NotBlank());
+        $metadata->addPropertyConstraint('billing_lastname', new NotBlank());
+        $metadata->addPropertyConstraint('billing_address', new NotBlank());
+        $metadata->addPropertyConstraint('billing_city', new NotBlank());
+        $metadata->addPropertyConstraint('billing_country', new NotBlank());
+        $metadata->addPropertyConstraint('billing_zipcode', new NotBlank());
+        
+        $metadata->addPropertyConstraint('shipping_firstname', new NotBlank());
+        $metadata->addPropertyConstraint('shipping_lastname', new NotBlank());
+        $metadata->addPropertyConstraint('shipping_address', new NotBlank());
+        $metadata->addPropertyConstraint('shipping_city', new NotBlank());
+        $metadata->addPropertyConstraint('shipping_country', new NotBlank());
+        $metadata->addPropertyConstraint('shipping_zipcode', new NotBlank());
+        
+        $metadata->addPropertyConstraint('quantity', new NotBlank());
+        $metadata->addPropertyConstraint('payment_method', new NotBlank());
+        $metadata->addPropertyConstraint('shipping_cost', new NotBlank());
+        $metadata->addPropertyConstraint('shipping_method', new NotBlank());
+        $metadata->addPropertyConstraint('status', new NotBlank());
+        $metadata->addPropertyConstraint('user', new NotBlank());
     }
 }

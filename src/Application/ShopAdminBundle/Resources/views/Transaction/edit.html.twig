@@ -6,20 +6,211 @@
 
 {% block javascripts %}{% endblock %}
 
+{% form_theme edit_form _self %}
+ 
+{% block form_errors %}
+{% spaceless %}
+    {% if errors|length > 0 %}
+        {% for error in errors %}
+            <small class="help-block">{{ error.messageTemplate|trans(error.messageParameters, 'validators') }}</small>
+        {% endfor %}
+    {% endif %}
+{% endspaceless %}
+{% endblock form_errors %}
+
 {% block body %}
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
             <h1 class="page-header">Transaction edit</h1>
+        </div>  
+    </div>
+{#
+    <div class="row">
+        <div class="col-md-12">
 
             {{ form(edit_form) }}
 
             <a class="btn btn-default" href="{{ path('application_admin_transaction') }}">Back to the list</a>
-            
-            {{ form_start(delete_form, { 'attr': {'class': 'form-btn-inline'} }) }}   	
-              {{ form_widget(delete_form.submit, { 'attr': {'class': 'btn btn-danger'} }) }}
-            {{ form_end(delete_form) }}
+            {{ form(delete_form) }}
+        </div>
+    </div>
+#}
+    {{ form_start(edit_form, {'attr': {'novalidate': 'novalidate'}}) }}
+    {{ form_errors(edit_form) }}
+    <div class="row">
+        
+        <div class="col-md-6">
+            <div class="form-group {% if form_errors(edit_form.company) %} has-error {% endif %}">
+                {{ form_label(edit_form.company) }}
+                {{ form_widget(edit_form.company, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(edit_form.company) }}
+            </div>
+            <div class="form-group {% if form_errors(edit_form.email) %} has-error {% endif %}">
+                {{ form_label(edit_form.email) }}
+                {{ form_widget(edit_form.email, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(edit_form.email) }}
+            </div>
+            {#
+            <div class="form-group {% if form_errors(edit_form.email) %} has-error {% endif %}">
+                {{ form_label(edit_form.email, '', { 'label_attr': {'class': 'col-sm-3 control-label'} }) }}
+                <div class="col-sm-9">
+                    {{ form_widget(edit_form.email, { 'attr': {'class': 'form-control'} }) }}
+                    {{ form_errors(edit_form.email) }}
+                </div>
+            </div>
+            #}
+        </div>
+        <div class="clearfix"></div>
+        
+        <div class="col-md-6"> 
+            <div class="form-group {% if form_errors(edit_form.billing_firstname) %} has-error {% endif %}">
+                {{ form_label(edit_form.billing_firstname) }}
+                {{ form_widget(edit_form.billing_firstname, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(edit_form.billing_firstname) }}
+            </div>
+            <div class="form-group {% if form_errors(edit_form.billing_lastname) %} has-error {% endif %}">
+                {{ form_label(edit_form.billing_lastname) }}
+                {{ form_widget(edit_form.billing_lastname, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(edit_form.billing_lastname) }}
+            </div>
+            <div class="form-group {% if form_errors(edit_form.billing_phone) %} has-error {% endif %}">
+                {{ form_label(edit_form.billing_phone) }}
+                {{ form_widget(edit_form.billing_phone, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(edit_form.billing_phone) }}
+            </div>
+            <div class="form-group {% if form_errors(edit_form.billing_fax) %} has-error {% endif %}">
+                {{ form_label(edit_form.billing_fax) }}
+                {{ form_widget(edit_form.billing_fax, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(edit_form.billing_fax) }}
+            </div>
+            <div class="form-group {% if form_errors(edit_form.billing_address) %} has-error {% endif %}">
+                {{ form_label(edit_form.billing_address) }}
+                {{ form_widget(edit_form.billing_address, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(edit_form.billing_address) }}
+            </div>
+            <div class="form-group {% if form_errors(edit_form.billing_address2) %} has-error {% endif %}">
+                {{ form_label(edit_form.billing_address2) }}
+                {{ form_widget(edit_form.billing_address2, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(edit_form.billing_address2) }}
+            </div>
+            <div class="form-group {% if form_errors(edit_form.billing_city) %} has-error {% endif %}">
+                {{ form_label(edit_form.billing_city) }}
+                {{ form_widget(edit_form.billing_city, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(edit_form.billing_city) }}
+            </div>
+            <div class="form-group {% if form_errors(edit_form.billing_country) %} has-error {% endif %}">
+                {{ form_label(edit_form.billing_country) }}
+                {{ form_widget(edit_form.billing_country, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(edit_form.billing_country) }}
+            </div>
+            <div class="form-group {% if form_errors(edit_form.billing_zipcode) %} has-error {% endif %}">
+                {{ form_label(edit_form.billing_zipcode) }}
+                {{ form_widget(edit_form.billing_zipcode, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(edit_form.billing_zipcode) }}
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group {% if form_errors(edit_form.shipping_firstname) %} has-error {% endif %}">
+                {{ form_label(edit_form.shipping_firstname) }}
+                {{ form_widget(edit_form.shipping_firstname, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(edit_form.shipping_firstname) }}
+            </div>
+            <div class="form-group {% if form_errors(edit_form.shipping_lastname) %} has-error {% endif %}">
+                {{ form_label(edit_form.shipping_lastname) }}
+                {{ form_widget(edit_form.shipping_lastname, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(edit_form.shipping_lastname) }}
+            </div>
+            <div class="form-group {% if form_errors(edit_form.shipping_phone) %} has-error {% endif %}">
+                {{ form_label(edit_form.shipping_phone) }}
+                {{ form_widget(edit_form.shipping_phone, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(edit_form.shipping_phone) }}
+            </div>
+            <div class="form-group {% if form_errors(edit_form.shipping_fax) %} has-error {% endif %}">
+                {{ form_label(edit_form.shipping_fax) }}
+                {{ form_widget(edit_form.shipping_fax, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(edit_form.shipping_fax) }}
+            </div>
+            <div class="form-group {% if form_errors(edit_form.shipping_address) %} has-error {% endif %}">
+                {{ form_label(edit_form.shipping_address) }}
+                {{ form_widget(edit_form.shipping_address, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(edit_form.shipping_address) }}
+            </div>
+            <div class="form-group {% if form_errors(edit_form.shipping_address2) %} has-error {% endif %}">
+                {{ form_label(edit_form.shipping_address2) }}
+                {{ form_widget(edit_form.shipping_address2, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(edit_form.shipping_address2) }}
+            </div>
+            <div class="form-group {% if form_errors(edit_form.shipping_city) %} has-error {% endif %}">
+                {{ form_label(edit_form.shipping_city) }}
+                {{ form_widget(edit_form.shipping_city, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(edit_form.shipping_city) }}
+            </div>
+            <div class="form-group {% if form_errors(edit_form.shipping_country) %} has-error {% endif %}">
+                {{ form_label(edit_form.shipping_country) }}
+                {{ form_widget(edit_form.shipping_country, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(edit_form.shipping_country) }}
+            </div>
+            <div class="form-group {% if form_errors(edit_form.shipping_zipcode) %} has-error {% endif %}">
+                {{ form_label(edit_form.shipping_zipcode) }}
+                {{ form_widget(edit_form.shipping_zipcode, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(edit_form.shipping_zipcode) }}
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group {% if form_errors(edit_form.quantity) %} has-error {% endif %}">
+                {{ form_label(edit_form.quantity) }}
+                {{ form_widget(edit_form.quantity, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(edit_form.quantity) }}
+            </div>
+            <div class="form-group {% if form_errors(edit_form.payment_method) %} has-error {% endif %}">
+                {{ form_label(edit_form.payment_method) }}
+                {{ form_widget(edit_form.payment_method, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(edit_form.payment_method) }}
+            </div>
+            <div class="form-group {% if form_errors(edit_form.shipping_cost) %} has-error {% endif %}">
+                {{ form_label(edit_form.shipping_cost) }}
+                {{ form_widget(edit_form.shipping_cost, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(edit_form.shipping_cost) }}
+            </div>
+            <div class="form-group {% if form_errors(edit_form.shipping_method) %} has-error {% endif %}">
+                {{ form_label(edit_form.shipping_method) }}
+                {{ form_widget(edit_form.shipping_method, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(edit_form.shipping_method) }}
+            </div>
+            <div class="form-group {% if form_errors(edit_form.status) %} has-error {% endif %}">
+                {{ form_label(edit_form.status) }}
+                {{ form_widget(edit_form.status, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(edit_form.status) }}
+            </div>
+            <div class="form-group {% if form_errors(edit_form.created_at) %} has-error {% endif %}">
+                {{ form_label(edit_form.created_at) }}
+                {{ form_widget(edit_form.created_at, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(edit_form.created_at) }}
+            </div>
+            <div class="form-group {% if form_errors(edit_form.user) %} has-error {% endif %}">
+                {{ form_label(edit_form.user) }}
+                {{ form_widget(edit_form.user, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(edit_form.user) }}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                {{ form_widget(edit_form.submit, { 'attr': {'class': 'btn btn-default'} }) }}
+                <a class="btn btn-default" href="{{ path('application_admin_transaction') }}">Back to the list</a>
+            </div>
+        </div>
+    </div>
 
+    {{ form_end(edit_form) }}
+    
+    <div class="row">
+        <div class="col-md-12">
+        {{ form_start(delete_form, { 'attr': {'class': 'form-btn-inline'} }) }}   	
+          {{ form_widget(delete_form.submit, { 'attr': {'class': 'btn btn-danger'} }) }}
+        {{ form_end(delete_form) }}
         </div>
     </div>
 </div>
