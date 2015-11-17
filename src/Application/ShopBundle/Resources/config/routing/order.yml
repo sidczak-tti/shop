@@ -5,3 +5,8 @@ application_order_cart:
 application_order_checkout:
     path:     /checkout
     defaults: { _controller: "ApplicationShopBundle:Order:checkout" }
+    
+application_order_checkout_create:
+    path:     /create
+    defaults: { _controller: "ApplicationShopBundle:Order:create" }
+    requirements: { _method: post }

@@ -4,6 +4,44 @@
 {% block stylesheets %}{% endblock %}
 {% block javascripts %}{% endblock %}
 
+{% form_theme form _self %}
+ 
+{% block form_errors %}
+{% spaceless %}
+    {% if errors|length > 0 %}
+        {% for error in errors %}
+            <small class="help-block">{{ error.messageTemplate|trans(error.messageParameters, 'validators') }}</small>
+        {% endfor %}
+    {% endif %}
+{% endspaceless %}
+{% endblock form_errors %}
+
+{% block choice_widget_expanded %}
+{% spaceless %}
+    <div {{ block('widget_container_attributes') }} class="my-form-choices">
+    {% for child in form %}
+        {{ form_widget(child) }}
+    {% endfor %}
+    </div>
+{% endspaceless %}
+{% endblock choice_widget_expanded %}
+
+{% block checkbox_widget %}
+{% spaceless %}
+    <div class="checkbox">
+        <label for="{{ id }}"><input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />{{ label|trans({}, translation_domain) }}</label>
+    </div>
+{% endspaceless %}
+{% endblock checkbox_widget %}
+
+{% block radio_widget %}
+{% spaceless %}
+    <div class="radio">
+        <label for="{{ id }}"><input type="radio" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />{{ label|trans({}, translation_domain) }}</label>
+    </div>
+{% endspaceless %}
+{% endblock radio_widget %}
+
 {% block body %}
 <div class="container">
     <div class="row">    
@@ -20,23 +58,166 @@
 </div>
                 
 <div class="container">
+    {# {{ form(form) }} #}
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+    {{ form_errors(form) }}
     <div class="row">    
     	<div class="col-md-4">
-    		
-
+            <h3><i class="fa fa-home"></i> Billing address</h3>
+            <div class="form-group {% if form_errors(form.company) %} has-error {% endif %}">
+                {{ form_label(form.company) }}
+                {{ form_widget(form.company, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(form.company) }}
+            </div>
+            <div class="form-group {% if form_errors(form.email) %} has-error {% endif %}">
+                {{ form_label(form.email) }}
+                {{ form_widget(form.email, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(form.email) }}
+            </div>
+            <div class="form-group {% if form_errors(form.billing_firstname) %} has-error {% endif %}">
+                {{ form_label(form.billing_firstname) }}
+                {{ form_widget(form.billing_firstname, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(form.billing_firstname) }}
+            </div>
+            <div class="form-group {% if form_errors(form.billing_lastname) %} has-error {% endif %}">
+                {{ form_label(form.billing_lastname) }}
+                {{ form_widget(form.billing_lastname, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(form.billing_lastname) }}
+            </div>
+            <div class="form-group {% if form_errors(form.billing_phone) %} has-error {% endif %}">
+                {{ form_label(form.billing_phone) }}
+                {{ form_widget(form.billing_phone, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(form.billing_phone) }}
+            </div>
+            <div class="form-group {% if form_errors(form.billing_fax) %} has-error {% endif %}">
+                {{ form_label(form.billing_fax) }}
+                {{ form_widget(form.billing_fax, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(form.billing_fax) }}
+            </div>
+            <div class="form-group {% if form_errors(form.billing_address) %} has-error {% endif %}">
+                {{ form_label(form.billing_address) }}
+                {{ form_widget(form.billing_address, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(form.billing_address) }}
+            </div>
+            <div class="form-group {% if form_errors(form.billing_address2) %} has-error {% endif %}">
+                {{ form_widget(form.billing_address2, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(form.billing_address2) }}
+            </div>
+            <div class="form-group {% if form_errors(form.billing_city) %} has-error {% endif %}">
+                {{ form_label(form.billing_city) }}
+                {{ form_widget(form.billing_city, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(form.billing_city) }}
+            </div>
+            <div class="form-group {% if form_errors(form.billing_country) %} has-error {% endif %}">
+                {{ form_label(form.billing_country) }}
+                {{ form_widget(form.billing_country, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(form.billing_country) }}
+            </div>
+            <div class="form-group {% if form_errors(form.billing_zipcode) %} has-error {% endif %}">
+                {{ form_label(form.billing_zipcode) }}
+                {{ form_widget(form.billing_zipcode, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(form.billing_zipcode) }}
+            </div>
+            
+            <h3><i class="fa fa-truck"></i> Shipping address</h3>
+            <div class="form-group {% if form_errors(form.shipping_firstname) %} has-error {% endif %}">
+                {{ form_label(form.shipping_firstname, 'First name *') }}
+                {{ form_widget(form.shipping_firstname, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(form.shipping_firstname) }}
+            </div>
+            <div class="form-group {% if form_errors(form.shipping_lastname) %} has-error {% endif %}">
+                {{ form_label(form.shipping_lastname, 'Last name *') }}
+                {{ form_widget(form.shipping_lastname, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(form.shipping_lastname) }}
+            </div>
+            <div class="form-group {% if form_errors(form.shipping_phone) %} has-error {% endif %}">
+                {{ form_label(form.shipping_phone, 'Phone') }}
+                {{ form_widget(form.shipping_phone, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(form.shipping_phone) }}
+            </div>
+            <div class="form-group {% if form_errors(form.shipping_fax) %} has-error {% endif %}">
+                {{ form_label(form.shipping_fax, 'Fax') }}
+                {{ form_widget(form.shipping_fax, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(form.shipping_fax) }}
+            </div>
+            <div class="form-group {% if form_errors(form.shipping_address) %} has-error {% endif %}">
+                {{ form_label(form.shipping_address, 'Address *') }}
+                {{ form_widget(form.shipping_address, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(form.shipping_address) }}
+            </div>
+            <div class="form-group {% if form_errors(form.shipping_address2) %} has-error {% endif %}">
+                {{ form_widget(form.shipping_address2, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(form.shipping_address2) }}
+            </div>
+            <div class="form-group {% if form_errors(form.shipping_city) %} has-error {% endif %}">
+                {{ form_label(form.shipping_city, 'City *') }}
+                {{ form_widget(form.shipping_city, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(form.shipping_city) }}
+            </div>
+            <div class="form-group {% if form_errors(form.shipping_country) %} has-error {% endif %}">
+                {{ form_label(form.shipping_country, 'Country *') }}
+                {{ form_widget(form.shipping_country, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(form.shipping_country) }}
+            </div>
+            <div class="form-group {% if form_errors(form.shipping_zipcode) %} has-error {% endif %}">
+                {{ form_label(form.shipping_zipcode, 'Zip/postal code *') }}
+                {{ form_widget(form.shipping_zipcode, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(form.shipping_zipcode) }}
+            </div>
     	</div>
         <div class="col-md-4">
             <h3><i class="fa fa-truck"></i> Shipping method</h3>
-                Poczta Polska <b class="success">0,00 zł</b><br/>
-                DHL	<b>6,90 zł</b><br/>
-                Odbiór w Paczkomacie <b class="success">0,00 zł</b>
-                
+            <div class="form-group {% if form_errors(form.shipping_method) %} has-error {% endif %}">
+                {{ form_widget(form.shipping_method) }}
+                {{ form_errors(form.shipping_method) }}
+            </div>
             <h3><i class="fa fa-money"></i> Payment method</h3>
-                Przelew bankowy<br/>
-                PayU<br/>
-                PayPal<br/>
-                Płatne przy odbiorze
+            <div class="form-group {% if form_errors(form.payment_method) %} has-error {% endif %}">
+                {{ form_widget(form.payment_method) }}
+                {{ form_errors(form.payment_method) }}
+            </div>
     	</div>
+        <div class="col-md-4">
+            <div class="table-responsive">
+	    	<table class="table">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th style="width: 120px;">Subtotal</th>
+	    		</tr>
+                    </thead>
+                    <tbody>
+                    {% set subtotal_cart = null %}
+                    {% for product in app.session.get('product_cart') %}
+                    <tr>
+                        <td><a href="{{ path('application_product_show', { 'id': product.id, 'title': product.titleslug }) }}">{{ product.title|raw }}</a></td>
+                        <td>{{ product.quantity }}</td>
+                        <td>{{ product.subtotal|number_format(2, '.', ',') }} zł</td>
+                        {% set subtotal_cart = subtotal_cart + product.subtotal %}
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th colspan="2">Subtotal</th>
+                            <th colspan="2">{{ subtotal_cart|number_format(2, '.', ',') }} zł</th>
+	    		</tr>
+                        <tr>
+                            <th colspan="2">Shipping cost</th>
+                            <th colspan="2"> 0.00 zł</th>
+	    		</tr>
+                        <tr class="success">
+                            <th colspan="2"><h4>Total</h4></th>
+                            <th colspan="2"><h4>{{ subtotal_cart|number_format(2, '.', ',') }} zł</h4></th>
+	    		</tr>
+                    </tfoot>
+                </table>
+            </div>
+            <hr/>
+            {{ form_widget(form.submit, { 'attr': {'class': 'btn btn-primary btn-lg'} }) }}
+        </div>    
     </div>
+    {{ form_end(form) }}
 </div>
 {% endblock %}
