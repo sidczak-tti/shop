@@ -35,11 +35,13 @@ class LoadTransactionData extends AbstractFixture implements OrderedFixtureInter
         $transaction1->setShippingCity('Gdynia');
         $transaction1->setShippingCountry('Polska');
         $transaction1->setShippingZipcode('85-200');
-        $transaction1->setQuantity(1);
         $transaction1->setPaymentMethod('bank-transfer');
         $transaction1->setShippingCost(28);
         $transaction1->setShippingMethod('post');
         $transaction1->setStatus(1);
+        $transaction1->setQuantity(1);
+        $transaction1->setSubtotal(972);
+        $transaction1->setTotal(972 + $transaction1->getShippingCost());
         
         $transaction2 = new Transaction();
     	$transaction2->setUser($em->merge($this->getReference('user-stanislaw')));
@@ -63,11 +65,13 @@ class LoadTransactionData extends AbstractFixture implements OrderedFixtureInter
         $transaction2->setShippingCity('Gdynia');
         $transaction2->setShippingCountry('Polska');
         $transaction2->setShippingZipcode('85-200');
-        $transaction2->setQuantity(2);
         $transaction2->setPaymentMethod('paypal');
         $transaction2->setShippingCost(28);
         $transaction2->setShippingMethod('dhl');
         $transaction2->setStatus(1);
+        $transaction2->setQuantity(2);
+        $transaction2->setSubtotal(3003.98);
+        $transaction2->setTotal(3003.98 + $transaction2->getShippingCost());
         
         $transaction3 = new Transaction();
     	$transaction3->setUser($em->merge($this->getReference('user-krzysztof')));
@@ -91,11 +95,13 @@ class LoadTransactionData extends AbstractFixture implements OrderedFixtureInter
         $transaction3->setShippingCity('Gdynia');
         $transaction3->setShippingCountry('Polska');
         $transaction3->setShippingZipcode('85-200');
-        $transaction3->setQuantity(2);
         $transaction3->setPaymentMethod('paypal');
         $transaction3->setShippingCost(28);
         $transaction3->setShippingMethod('dhl');
         $transaction3->setStatus(1);
+        $transaction3->setQuantity(2);
+        $transaction3->setSubtotal(2473.99);
+        $transaction3->setTotal(2473.99 + $transaction3->getShippingCost());
         
         $em->persist($transaction1);
         $em->persist($transaction2);

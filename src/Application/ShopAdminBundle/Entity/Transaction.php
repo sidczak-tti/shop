@@ -867,4 +867,60 @@ class Transaction
         $metadata->addPropertyConstraint('status', new NotBlank());
         $metadata->addPropertyConstraint('user', new NotBlank());
     }
+    /**
+     * @var string
+     */
+    private $total;
+
+    /**
+     * @var string
+     */
+    private $subtotal;
+
+
+    /**
+     * Set total
+     *
+     * @param string $total
+     * @return Transaction
+     */
+    public function setTotal($total)
+    {
+        $this->total = $total;
+
+        return $this;
+    }
+
+    /**
+     * Get total
+     *
+     * @return string 
+     */
+    public function getTotal()
+    {
+        return $this->total;
+    }
+
+    /**
+     * Set subtotal
+     *
+     * @param string $subtotal
+     * @return Transaction
+     */
+    public function setSubtotal($subtotal)
+    {
+        $this->subtotal = $subtotal;
+
+        return $this;
+    }
+
+    /**
+     * Get subtotal
+     *
+     * @return string 
+     */
+    public function getSubtotal()
+    {
+        return $this->subtotal;
+    }
 }

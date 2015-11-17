@@ -81,12 +81,12 @@ Application\ShopBundle\Entity\Transaction:
       length: 32
     quantity:
       type: integer
-    #total:
-    #  type: decimal
-    #  scale: 2
-    #subtotal:
-    #  type: decimal
-    #  scale: 2
+    subtotal:
+      type: decimal
+      scale: 2
+    total:
+      type: decimal
+      scale: 2
     payment_method:
       type: string
       length: 32

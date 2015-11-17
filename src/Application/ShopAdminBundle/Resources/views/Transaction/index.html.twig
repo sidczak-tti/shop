@@ -21,11 +21,12 @@
                             <th>Phone</th>
                             <th>Date</th>
                             <th>Quantity</th>
-                            <th>Subtotal</th>
+                            <th>Total</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
+                    {% set total_transaction = null %}
                     {% for entity in entities %}
                         <tr>
                             <td><a href="{{ path('application_admin_transaction_show', { 'id': entity.id }) }}">Order {{ entity.id }}</a></td>
@@ -43,18 +44,19 @@
                             <td>000 000 000</td>
                             <td>{% if entity.createdat %}{{ entity.createdat|date('Y-m-d H:i:s') }}{% endif %}</td>
                             <td>{{ entity.quantity }}</td>
-                            <td>x1000 zł</td>
+                            <td>{{ entity.total|number_format(2, '.', ',') }} zł</td>
                             <td>
                                 <a class="btn btn-primary btn-xs" href="{{ path('application_admin_transaction_show', { 'id': entity.id }) }}"><i class="fa fa-fw fa-file-text-o"></i>show</a>
                                 <a class="btn btn-primary btn-xs" href="{{ path('application_admin_transaction_edit', { 'id': entity.id }) }}"><i class="fa fa-fw fa-file-text-o"></i>edit</a>
                             </td>
+                            {% set total_transaction = total_transaction + entity.total %}
                         </tr>
                     {% endfor %}
                     </tbody>
                     <tfoot>
                         <tr class="success">
-                            <th colspan="6" class="text-right"><h4>Subtotal</h4></th>
-                            <th colspan="2"><h4>x4,947.98 zł</h4></th>
+                            <th colspan="6" class="text-right"><h4>Total</h4></th>
+                            <th colspan="2"><h4>{{ total_transaction|number_format(2, '.', ',') }} zł</h4></th>
 	    		</tr>
                     </tfoot>
                 </table>
