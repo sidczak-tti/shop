@@ -8,12 +8,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Application\ShopAdminBundle\Entity\Transaction;
 use Application\ShopAdminBundle\Form\TransactionType;
 
-use Application\ShopAdminBundle\Entity\ProductTransaction;
-use Application\ShopAdminBundle\Form\ProductTransactionType;
-
-use Application\ShopAdminBundle\Entity\Product;
-use Application\ShopAdminBundle\Form\ProductType;
-
 /**
  * Transaction controller.
  *
