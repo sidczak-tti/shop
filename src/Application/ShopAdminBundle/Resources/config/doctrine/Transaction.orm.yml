@@ -81,10 +81,10 @@ Application\ShopAdminBundle\Entity\Transaction:
       length: 32
     quantity:
       type: integer
-    #total:
+    #subtotal:
     #  type: decimal
     #  scale: 2
-    #subtotal:
+    #total:
     #  type: decimal
     #  scale: 2
     payment_method:

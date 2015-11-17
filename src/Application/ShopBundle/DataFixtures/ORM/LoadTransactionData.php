@@ -36,9 +36,9 @@ class LoadTransactionData extends AbstractFixture implements OrderedFixtureInter
         $transaction1->setShippingCountry('Polska');
         $transaction1->setShippingZipcode('85-200');
         $transaction1->setQuantity(1);
-        $transaction1->setPaymentMethod('Przelew bankowy');
+        $transaction1->setPaymentMethod('bank-transfer');
         $transaction1->setShippingCost(28);
-        $transaction1->setShippingMethod('Poczta Polska');
+        $transaction1->setShippingMethod('post');
         $transaction1->setStatus(1);
         
         $transaction2 = new Transaction();
@@ -64,9 +64,9 @@ class LoadTransactionData extends AbstractFixture implements OrderedFixtureInter
         $transaction2->setShippingCountry('Polska');
         $transaction2->setShippingZipcode('85-200');
         $transaction2->setQuantity(2);
-        $transaction2->setPaymentMethod('Przelew bankowy');
+        $transaction2->setPaymentMethod('paypal');
         $transaction2->setShippingCost(28);
-        $transaction2->setShippingMethod('Poczta Polska');
+        $transaction2->setShippingMethod('dhl');
         $transaction2->setStatus(1);
         
         $transaction3 = new Transaction();
@@ -92,9 +92,9 @@ class LoadTransactionData extends AbstractFixture implements OrderedFixtureInter
         $transaction3->setShippingCountry('Polska');
         $transaction3->setShippingZipcode('85-200');
         $transaction3->setQuantity(2);
-        $transaction3->setPaymentMethod('Przelew bankowy');
+        $transaction3->setPaymentMethod('paypal');
         $transaction3->setShippingCost(28);
-        $transaction3->setShippingMethod('Poczta Polska');
+        $transaction3->setShippingMethod('dhl');
         $transaction3->setStatus(1);
         
         $em->persist($transaction1);

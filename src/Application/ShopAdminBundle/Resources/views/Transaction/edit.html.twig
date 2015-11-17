@@ -18,6 +18,32 @@
 {% endspaceless %}
 {% endblock form_errors %}
 
+{% block choice_widget_expanded %}
+{% spaceless %}
+    <div {{ block('widget_container_attributes') }} class="my-form-choices">
+    {% for child in form %}
+        {{ form_widget(child) }}
+    {% endfor %}
+    </div>
+{% endspaceless %}
+{% endblock choice_widget_expanded %}
+
+{% block checkbox_widget %}
+{% spaceless %}
+    <div class="checkbox">
+        <label for="{{ id }}"><input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />{{ label|trans({}, translation_domain) }}</label>
+    </div>
+{% endspaceless %}
+{% endblock checkbox_widget %}
+
+{% block radio_widget %}
+{% spaceless %}
+    <div class="radio">
+        <label for="{{ id }}"><input type="radio" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />{{ label|trans({}, translation_domain) }}</label>
+    </div>
+{% endspaceless %}
+{% endblock radio_widget %}
+
 {% block body %}
 <div class="container-fluid">
     <div class="row">
@@ -36,6 +62,7 @@
         </div>
     </div>
 #}
+    {# {{ form_start(edit_form, {'attr': {'novalidate': 'novalidate', 'class': 'form-horizontal'}}) }} #}
     {{ form_start(edit_form, {'attr': {'novalidate': 'novalidate'}}) }}
     {{ form_errors(edit_form) }}
     <div class="row">
@@ -165,7 +192,7 @@
             </div>
             <div class="form-group {% if form_errors(edit_form.payment_method) %} has-error {% endif %}">
                 {{ form_label(edit_form.payment_method) }}
-                {{ form_widget(edit_form.payment_method, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_widget(edit_form.payment_method) }}
                 {{ form_errors(edit_form.payment_method) }}
             </div>
             <div class="form-group {% if form_errors(edit_form.shipping_cost) %} has-error {% endif %}">
@@ -175,7 +202,7 @@
             </div>
             <div class="form-group {% if form_errors(edit_form.shipping_method) %} has-error {% endif %}">
                 {{ form_label(edit_form.shipping_method) }}
-                {{ form_widget(edit_form.shipping_method, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_widget(edit_form.shipping_method) }}
                 {{ form_errors(edit_form.shipping_method) }}
             </div>
             <div class="form-group {% if form_errors(edit_form.status) %} has-error {% endif %}">

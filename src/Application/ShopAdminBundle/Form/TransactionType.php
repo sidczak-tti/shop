@@ -36,9 +36,22 @@ class TransactionType extends AbstractType
             ->add('shipping_country')
             ->add('shipping_zipcode')
             ->add('quantity')
-            ->add('payment_method')
+            //->add('payment_method')
+            ->add('payment_method', 'choice', array(
+                'choices' => array(
+                    'bank-transfer' => 'Bank transfer', 
+                    'payu' => 'PayU', 
+                    'paypal' => 'PayPal', 
+                    'cash-delivery' => 'Cash on delivery'
+                ),
+                'expanded' => true
+            ))
             ->add('shipping_cost')
-            ->add('shipping_method')
+            //->add('shipping_method')
+            ->add('shipping_method', 'choice', array(
+                'choices' => array('post' => 'Post', 'dhl' => 'DHL', 'reception-pack' => 'Reception pack'),
+                'expanded' => true
+            ))
             ->add('status')
             ->add('created_at', 'date', array(
             	'widget' => 'single_text',
