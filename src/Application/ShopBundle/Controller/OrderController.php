@@ -8,6 +8,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Application\ShopBundle\Entity\Transaction;
 use Application\ShopBundle\Form\CheckoutType;
 
+use Application\ShopBundle\Entity\ProductTransaction;
+
 class OrderController extends Controller
 {
     public function cartAction()
@@ -61,11 +63,38 @@ class OrderController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            
+            $session = $this->getRequest()->getSession();
+            $products = $session->get('product_cart');
+
+            $transaction_quantity = null;
+            $transaction_subtotal = null;
+            
+            foreach ($products as $product) {
+                $p = $em->getRepository('ApplicationShopBundle:Product')->find($product['id']);
+
+                $product_transaction = new ProductTransaction();
+                $product_transaction->setProduct($p);
+                $product_transaction->setTransaction($entity);
+                $product_transaction->setQuantity($product['quantity']);
+                
+                $em->persist($product_transaction);
+                
+                $transaction_quantity += $product['quantity'];
+                $transaction_subtotal += $product['subtotal'];
+            }
+            
+            $entity->setQuantity($transaction_quantity);
+            $entity->setSubtotal($transaction_subtotal);
+            $entity->setShippingCost(28);
+            $entity->setTotal($transaction_subtotal + $entity->getShippingCost());
+            $entity->setStatus(1);
+            
             $em->persist($entity);
             $em->flush();
-
-            //return $this->redirect($this->generateUrl('application_admin_transaction_show', array('id' => $entity->getId())));
-            //return $this->render('ApplicationShopBundle:Order:cart.html.twig');
+            
+            //$session->remove('product_cart');
+            //return $this->redirect($this->generateUrl('application_order_checkout_complete', array('id' => $entity->getId())));
         }
 
         return $this->render('ApplicationShopBundle:Order:checkout.html.twig', array(

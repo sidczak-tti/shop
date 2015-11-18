@@ -40,8 +40,17 @@
                                 </select>
                                 {# {{ entity.status }} #}
                             </td>
-                            <td><a href="mailto:{{ entity.email }}">@</a> Anonymous</td>
-                            <td>000 000 000</td>
+                            <td>
+                                {% if entity.user %}
+                                    <a href="mailto:{{ entity.user.email }}">@</a> {{ entity.user }}
+                                {% else %}
+                                    <a href="mailto:{{ entity.email }}">@</a> {{ entity.billingfirstname }} {{ entity.billinglastname }}
+                                {% endif %}
+                            </td>
+                            <td>
+                                <span class="hidden-xs">{{ entity.billingphone }}</span>
+                                <span class="hidden-sm hidden-md hidden-lg"><a href="tel:{{ entity.billingphone }}">{{ entity.billingphone }}</a></span>
+                            </td>
                             <td>{% if entity.createdat %}{{ entity.createdat|date('Y-m-d H:i:s') }}{% endif %}</td>
                             <td>{{ entity.quantity }}</td>
                             <td>{{ entity.total|number_format(2, '.', ',') }} zł</td>
