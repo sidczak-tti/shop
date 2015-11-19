@@ -34,9 +34,9 @@
         </div>
         <div class="col-md-4">
             <h3><i class="fa fa-home"></i> Billing address</h3>
-            {# {% if entity.company %}
+            {% if entity.company %}
             <h4>{{ entity.company }}</h4>
-            {% endif %}#}
+            {% endif %}
             <ul class="fa-ul">
                 <li><i class="fa-li fa fa-user"></i> <a href="#">{{ entity.billingFirstname }} {{ entity.billingLastname }}</a></li>
                 <li><i class="fa-li fa fa-envelope"></i> <a href="mailto:{{ entity.email }}">{{ entity.email }}</a></li>

@@ -93,13 +93,46 @@ class OrderController extends Controller
             $em->persist($entity);
             $em->flush();
             
-            //$session->remove('product_cart');
-            //return $this->redirect($this->generateUrl('application_order_checkout_complete', array('id' => $entity->getId())));
+            $session->remove('product_cart');
+            return $this->redirect($this->generateUrl('application_order_checkout_complete', array('id' => $entity->getId())));
         }
 
         return $this->render('ApplicationShopBundle:Order:checkout.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
+        ));
+    }
+    
+    public function completeAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('ApplicationShopBundle:Transaction')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Transaction entity.');
+        }
+        
+        $repository = $em->getRepository('ApplicationShopBundle:Product');
+
+        $qb = $repository->createQueryBuilder('p')
+            ->add('select', 'p, pt, t')
+            ->leftJoin('p.transactions', 'pt')
+            ->leftJoin('pt.transaction', 't')
+            ->where('t.id = :transaction_id')
+            ->setParameter('transaction_id', $id);
+
+        $query = $qb->getQuery();
+        $products = $query->getResult();
+        
+        if (!$products) {
+            throw $this->createNotFoundException('Unable to find Product entity.');
+        }
+        
+        
+        return $this->render('ApplicationShopBundle:Order:complete.html.twig', array(
+            'entity'      => $entity,
+            'products'      => $products,
         ));
     }
     

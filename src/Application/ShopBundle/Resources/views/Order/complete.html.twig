@@ -1,0 +1,164 @@
+{% extends 'ApplicationShopBundle::layout.html.twig' %}
+
+{% block title %}Cart{% endblock %}
+{% block stylesheets %}{% endblock %}
+{% block javascripts %}{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">    
+    	<div class="col-lg-12">
+    		<div class="page-header">
+                    <h2>Order details</h2>
+    		</div>
+    		<ul class="breadcrumb">
+                <li><a href="{{ path('application_shop_start') }}">Start</a></li>
+                <li class="active">Your order has been received</li>
+            </ul>
+    	</div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h3>Congratulations! Your order has been successfully placed.</h3>
+            <a class="btn btn-lg btn-default" href="{{ path('application_product') }}">Click here to continue shopping</a>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="page-header">
+                <h3>Order {{ entity.id }} <small>({{ entity.createdat|date('Y-m-d H:i:s') }})</small>
+                    <small class="pull-right">Status: Open {{ entity.status }}</small>
+                </h3>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <h4><i class="fa fa-home"></i> Billing address</h4>
+            {% if entity.company %}
+            <h5>{{ entity.company }}</h5>
+            {% endif %}
+            <ul class="fa-ul">
+                <li><i class="fa-li fa fa-user"></i> {{ entity.billingFirstname }} {{ entity.billingLastname }}</li>
+                <li><i class="fa-li fa fa-envelope"></i> {{ entity.email }}</li>
+                <li><i class="fa-li fa fa-map-marker"></i>
+                    {{ entity.billingAddress }}<br/>
+                    {% if entity.billingAddress2 %}
+                      {{ entity.billingAddress2 }}<br/>
+                    {% endif %}
+                    {{ entity.billingZipcode }} {{ entity.billingCity }}<br/>
+                    {{ entity.billingCountry }}<br/>
+                </li>
+                {% if entity.billingPhone %}
+                  <li><i class="fa-li fa fa-phone"></i> {{ entity.billingPhone }}</li>
+                {% endif %}
+                {% if entity.billingFax %}
+                  <li><i class="fa-li fa fa-fax"></i> {{ entity.billingFax }}</li>
+                {% endif %}
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <h4><i class="fa fa-truck"></i> Shipping address</h4>
+            <ul class="fa-ul">
+                <li><i class="fa-li fa fa-user"></i>{{ entity.shippingFirstname }} {{ entity.shippingLastname }}</li>
+                <li><i class="fa-li fa fa-map-marker"></i>
+                    {{ entity.shippingAddress }}<br/>
+                    {% if entity.shippingAddress2 %}
+                      {{ entity.shippingAddress2 }}<br/>
+                    {% endif %}
+                    {{ entity.shippingZipcode }} {{ entity.shippingCity }}<br/>
+                    {{ entity.shippingCountry }}<br/>
+                </li>
+                {% if entity.shippingPhone %}
+                  <li><i class="fa-li fa fa-phone"></i> {{ entity.shippingPhone }}</li>
+                {% endif %}
+                {% if entity.shippingFax %}
+                  <li><i class="fa-li fa fa-fax"></i> {{ entity.shippingFax }}</li>
+                {% endif %}
+            </ul>
+            {# {{ entity.shippingaddress }} #}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h4><i class="fa fa-barcode"></i> Products information</h4>
+            <div class="table-responsive">
+	    	<table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Subtotal</th>
+	    		</tr>
+                    </thead>
+                    <tbody>
+                    {% for product in products %}
+                        <tr>
+                            <td><a href="{{ path('application_product_show', { 'id': product.id, 'title': product.titleslug }) }}">{{ product.title }}</a></td>
+                            <td>{{ product.price|number_format(2, '.', ',') }} zł</td>
+                            <td>
+                            {% set subtotal_product = null %}
+                            {% for pt in product.transactions %}
+                                {{ pt.quantity }}
+                                {% set subtotal_product = pt.quantity * product.price %}
+                            {% endfor %}
+                            </td>
+                            <td>{{ subtotal_product|number_format(2, '.', ',') }} zł</td>
+	    		</tr>
+                    {% endfor %}
+                    </tbody>
+                    <tfoot>
+                        <tr class="success">
+                            <th colspan="3" class="text-right">Subtotal</th>
+                            <th colspan="1">{{ entity.subtotal|number_format(2, '.', ',') }} zł</th>
+	    		</tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <h4><i class="fa fa-money"></i> Payment method</h4>
+            <p>{{ entity.paymentMethod }}</p>
+            
+            <h4><i class="fa fa-truck"></i> Shipping method</h4>
+            <p>{{ entity.shippingMethod }}</p>
+        </div>
+        <div class="col-md-6">
+            <h4>Summary</h4>
+            <div class="table-responsive">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th>Subtotal:</th>
+                            <td>{{ entity.subtotal|number_format(2, '.', ',') }} zł</td>
+                        </tr>
+                        <tr>
+                            <th>Shipping cost:</th> 
+                            <td>{{ entity.shippingCost|number_format(2, '.', ',') }} zł</td>
+                        </tr>
+                        <tr class="success">
+                            <th>Total cost:</th> 
+                            <th>{{ entity.total|number_format(2, '.', ',') }} zł</th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <a class="btn btn-default" href="#"><i class="fa fa-print"></i> Print invoice</a>
+            <a class="btn btn-default" href="#"><i class="fa fa-file-pdf-o"></i> Print invoice (pdf)</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

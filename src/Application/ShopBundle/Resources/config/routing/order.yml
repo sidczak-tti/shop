@@ -10,3 +10,11 @@ application_order_checkout_create:
     path:     /create
     defaults: { _controller: "ApplicationShopBundle:Order:create" }
     requirements: { _method: post }
+    
+application_order_checkout_complete:
+    path:     /{id}/complete
+    defaults: { _controller: "ApplicationShopBundle:Order:complete" }
+
+#do zrobienia w przyszłości templatki
+#application_order_show: #wyświetlanie wszystkich zamówień klienta 
+#application_order_details: #wyświetlenie szczegółów zamówienia klienta
