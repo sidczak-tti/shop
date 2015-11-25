@@ -1,0 +1,38 @@
+<div class="curtain">
+    <i class="fa fa-spinner fa-pulse"></i>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th style="width: 120px;">Subtotal</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% set subtotal_cart = null %}
+    {% for product in app.session.get('product_cart') %}
+        <tr>
+            <td><a href="{{ path('application_product_show', { 'id': product.id, 'title': product.titleslug }) }}">{{ product.title|raw }}</a></td>
+            <td>{{ product.quantity }}</td>
+            <td>{{ product.subtotal|number_format(2, '.', ',') }} zł</td>
+            {% set subtotal_cart = subtotal_cart + product.subtotal %}
+        </tr>
+    {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr>
+            <th colspan="2">Subtotal</th>
+            <th colspan="2">{{ subtotal_cart|number_format(2, '.', ',') }} zł</th>
+        </tr>
+        <tr>
+            <th colspan="2">Shipping cost</th>
+            <th colspan="2">{{ shipping_cost|number_format(2, '.', ',') }} zł</th>
+        </tr>
+        <tr class="success">
+            <th colspan="2"><h4>Total</h4></th>
+            {%set total_cart = subtotal_cart + shipping_cost %}
+            <th colspan="2"><h4>{{ total_cart|number_format(2, '.', ',') }} zł</h4></th>
+        </tr>
+    </tfoot>
+</table>

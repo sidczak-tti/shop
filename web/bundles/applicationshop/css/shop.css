@@ -22,3 +22,28 @@ body {
 .img-center{
     margin: 0px auto;
 }
+/* loader ajax */
+.loader{
+    position: relative;
+    overflow: hidden;
+}
+.curtain{
+    background: rgba(255, 255, 255, 0.7);
+    position: absolute;
+    display: none;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+}
+.curtain .fa{
+    position: absolute;
+    top: 20%;
+    left: 60%;
+    margin-left: -60px;
+    font-size: 50px;
+    color: #999;
+}
+.loader .curtain{
+    display: block;
+}

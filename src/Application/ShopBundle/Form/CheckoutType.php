@@ -48,9 +48,9 @@ class CheckoutType extends AbstractType
             //->add('shipping_method')
             ->add('shipping_method', 'choice', array(
                 'choices' => array(
-                    'post' => 'Post 0,00 zł', 
-                    'dhl' => 'DHL 6,90 zł', 
-                    'reception-pack' => 'Reception pack 0,00 zł'
+                    'post' => 'Post 10.00 zł', 
+                    'dhl' => 'DHL 6.90 zł', 
+                    'reception-pack' => 'Reception pack 0.00 zł'
                 ),
                 'expanded' => true
             ))

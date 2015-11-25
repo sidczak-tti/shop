@@ -26,9 +26,19 @@ class OrderController extends Controller
         $entity = new Transaction();
         $form = $this->createCreateForm($entity);
         
+        $session = $this->getRequest()->getSession();
+        
+        $result = $session->get('shipping_cost');
+        $result ? $session->get('shipping_cost') : 0 ;
+        
+        if(!$session->get('product_cart')){
+            return $this->redirect($this->generateUrl('application_order_cart'));
+        }
+        
         return $this->render('ApplicationShopBundle:Order:checkout.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
+            'shipping_cost' => $result,
         ));
     }
     
@@ -60,12 +70,31 @@ class OrderController extends Controller
         $entity = new Transaction();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
-
+        
+        $session = $this->getRequest()->getSession();
+        
+        $result = $session->get('shipping_cost');
+        $result ? $session->get('shipping_cost') : 0 ;
+        
+        if ($request->isXmlHttpRequest()) {
+            
+            //$session->remove('shipping_cost');
+            $session->set('shipping_cost', $this->getRequest()->get('shipping_cost'));
+            $result = $session->get('shipping_cost');
+            
+            return $this->render('ApplicationShopBundle:Order:_cartAjax.html.twig', array(
+                'shipping_cost' => $result,
+            ));
+        }
+        
+        $products = $session->get('product_cart');
+        
+        if (!$products) {
+            return $this->redirect($this->generateUrl('application_order_cart'));
+        }
+        
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            
-            $session = $this->getRequest()->getSession();
-            $products = $session->get('product_cart');
 
             $transaction_quantity = null;
             $transaction_subtotal = null;
@@ -86,13 +115,14 @@ class OrderController extends Controller
             
             $entity->setQuantity($transaction_quantity);
             $entity->setSubtotal($transaction_subtotal);
-            $entity->setShippingCost(28);
+            $entity->setShippingCost($result);
             $entity->setTotal($transaction_subtotal + $entity->getShippingCost());
             $entity->setStatus(1);
             
             $em->persist($entity);
             $em->flush();
             
+            $session->remove('shipping_cost');
             $session->remove('product_cart');
             return $this->redirect($this->generateUrl('application_order_checkout_complete', array('id' => $entity->getId())));
         }
@@ -100,6 +130,7 @@ class OrderController extends Controller
         return $this->render('ApplicationShopBundle:Order:checkout.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
+            'shipping_cost' => $result,
         ));
     }
     
