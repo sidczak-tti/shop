@@ -4,6 +4,10 @@ namespace Application\ShopBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Mapping\ClassMetadata;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * Transaction
  */
@@ -837,5 +841,127 @@ class Transaction
     public function getShippingMethod()
     {
         return $this->shipping_method;
+    }
+    /**
+     * @var string
+     */
+    private $total;
+
+    /**
+     * @var string
+     */
+    private $subtotal;
+
+
+    /**
+     * Set total
+     *
+     * @param string $total
+     * @return Transaction
+     */
+    public function setTotal($total)
+    {
+        $this->total = $total;
+
+        return $this;
+    }
+
+    /**
+     * Get total
+     *
+     * @return string 
+     */
+    public function getTotal()
+    {
+        return $this->total;
+    }
+
+    /**
+     * Set subtotal
+     *
+     * @param string $subtotal
+     * @return Transaction
+     */
+    public function setSubtotal($subtotal)
+    {
+        $this->subtotal = $subtotal;
+
+        return $this;
+    }
+
+    /**
+     * Get subtotal
+     *
+     * @return string 
+     */
+    public function getSubtotal()
+    {
+        return $this->subtotal;
+    }
+    
+    /**
+     * @var integer
+     */
+    private $different_shipping_address;
+    
+    /**
+     * Set different_shipping_address
+     *
+     * @param integer $differentShippingAddress
+     * @return Transaction
+     */
+    public function setDifferentShippingAddress($differentShippingAddress)
+    {
+        $this->different_shipping_address = $differentShippingAddress;
+        
+        return $this;
+    }
+    
+    /**
+     * Get different_shipping_address
+     *
+     * @return integer
+     */
+    public function getDifferentShippingAddress()
+    {
+        return $this->different_shipping_address;
+    }
+    
+
+
+
+    
+    public static function loadValidatorMetadata(ClassMetadata $metadata)
+    {
+        $metadata->addPropertyConstraint('email', new NotBlank());
+        
+        $metadata->addPropertyConstraint('billing_firstname', new NotBlank());
+        $metadata->addPropertyConstraint('billing_lastname', new NotBlank());
+        $metadata->addPropertyConstraint('billing_address', new NotBlank());
+        $metadata->addPropertyConstraint('billing_city', new NotBlank());
+        $metadata->addPropertyConstraint('billing_country', new NotBlank());
+        $metadata->addPropertyConstraint('billing_zipcode', new NotBlank());
+        
+        $metadata->addPropertyConstraint('shipping_firstname', new Assert\NotBlank(array(
+            'groups' => array('different_shipping_address'),
+        )));
+        $metadata->addPropertyConstraint('shipping_lastname', new Assert\NotBlank(array(
+            'groups' => array('different_shipping_address'),
+        )));
+        $metadata->addPropertyConstraint('shipping_address', new Assert\NotBlank(array(
+            'groups' => array('different_shipping_address'),
+        )));
+        $metadata->addPropertyConstraint('shipping_city', new Assert\NotBlank(array(
+            'groups' => array('different_shipping_address'),
+        )));
+        $metadata->addPropertyConstraint('shipping_country', new Assert\NotBlank(array(
+            'groups' => array('different_shipping_address'),
+        )));
+        $metadata->addPropertyConstraint('shipping_zipcode', new Assert\NotBlank(array(
+            'groups' => array('different_shipping_address'),
+        )));
+        
+        $metadata->addPropertyConstraint('payment_method', new NotBlank());
+        $metadata->addPropertyConstraint('shipping_method', new NotBlank());
     }
 }

@@ -6,6 +6,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
+use Symfony\Component\Form\FormInterface;
+
 class CheckoutType extends AbstractType
 {
     /**
@@ -26,6 +28,10 @@ class CheckoutType extends AbstractType
             ->add('billing_city', null, array('label' => 'City *'))
             ->add('billing_country', null, array('label' => 'Country *'))
             ->add('billing_zipcode', null, array('label' => 'Zip/postal code *'))
+            ->add('different_shipping_address', 'checkbox', array(
+                'label' => 'Ship to the different address',
+                //'attr' => array('checked' => 'checked'),
+            ))
             ->add('shipping_firstname')
             ->add('shipping_lastname')
             ->add('shipping_phone')
@@ -63,10 +69,18 @@ class CheckoutType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Application\ShopBundle\Entity\Transaction'
+            'data_class' => 'Application\ShopBundle\Entity\Transaction',
+            'validation_groups' => function(FormInterface $form){
+                $data = $form->getData();
+                if ($data->getDifferentShippingAddress() == true) {
+                    return array('Default', 'different_shipping_address');
+                } else {
+                    return array('Default');
+                }
+            }
         ));
     }
-
+    
     /**
      * @return string
      */

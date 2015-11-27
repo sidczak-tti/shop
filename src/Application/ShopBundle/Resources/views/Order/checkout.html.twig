@@ -136,6 +136,7 @@ $(document).ready(function()
     {{ form_errors(form) }}
     <div class="row">    
     	<div class="col-md-4">
+            <div id="billing-address">
             <h3><i class="fa fa-home"></i> Billing address</h3>
             <div class="form-group {% if form_errors(form.company) %} has-error {% endif %}">
                 {{ form_label(form.company) }}
@@ -191,7 +192,15 @@ $(document).ready(function()
                 {{ form_widget(form.billing_zipcode, { 'attr': {'class': 'form-control'} }) }}
                 {{ form_errors(form.billing_zipcode) }}
             </div>
+            </div>
             
+            <div class="form-group {% if form_errors(form.different_shipping_address) %} has-error {% endif %}">
+                {# {{ form_label(form.different_shipping_address) }} #}
+                {{ form_widget(form.different_shipping_address) }}
+                {{ form_errors(form.different_shipping_address) }}
+            </div>
+            
+            <div id="shipping-address">
             <h3><i class="fa fa-truck"></i> Shipping address</h3>
             <div class="form-group {% if form_errors(form.shipping_firstname) %} has-error {% endif %}">
                 {{ form_label(form.shipping_firstname, 'First name *') }}
@@ -236,6 +245,7 @@ $(document).ready(function()
                 {{ form_label(form.shipping_zipcode, 'Zip/postal code *') }}
                 {{ form_widget(form.shipping_zipcode, { 'attr': {'class': 'form-control'} }) }}
                 {{ form_errors(form.shipping_zipcode) }}
+            </div>
             </div>
     	</div>
         <div class="col-md-4">

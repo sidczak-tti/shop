@@ -118,4 +118,5 @@ Application\ShopBundle\Entity\Transaction:
         name: user_id
         referencedColumnName: id
   lifecycleCallbacks:
-    prePersist: [ setCreatedAtValue ]
+    prePersist: [ setCreatedAtValue, setShippingData ]
+    preUpdate: [ setShippingData ]
