@@ -47,3 +47,6 @@ body {
 .loader .curtain{
     display: block;
 }
+#shipping-address.shipping-address-close{
+    display: none;
+}

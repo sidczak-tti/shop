@@ -72,6 +72,18 @@ $(document).ready(function()
 
     });
 
+    $( "#application_shopbundle_checkout_different_shipping_address:checkbox" ).change(function() {
+
+        if ($(this).is(":checked")) {
+            //$("#shipping-address").show();    
+            $("#shipping-address").removeClass().addClass("shipping-address-open");
+        } else {
+            //$("#shipping-address").hide();
+            $("#shipping-address").removeClass().addClass("shipping-address-close");
+        }
+
+    }).change();
+    
 });
 </script>
     
