@@ -301,8 +301,8 @@ class Category
      */
     public function getSlug()
     {
-        # return $this->slug;
-        return Shop::slugify($this->getTitle());
+        return $this->slug;
+        #return Shop::slugify($this->getTitle());
     }
     /**
      * @ORM\PrePersist
