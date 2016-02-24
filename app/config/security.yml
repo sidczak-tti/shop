@@ -17,13 +17,13 @@ security:
         dev:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
-
+            
         login:
             pattern:  ^/dashboard/admin_login$
             security: false
 
         secured_area:
-            pattern:    ^/dashboard/
+            pattern:    ^/
             form_login:
                 #check_path: /dashboard/admin_login_check
                 #login_path: /dashboard/admin_login
@@ -35,7 +35,7 @@ security:
                 path:   application_shop_admin_logout
                 target: application_shop_admin_homepage
                 #target: application_shop_start #przekierowanie do strony głównej po wylogowaniu
-            #anonymous: ~
+            anonymous: ~
             #http_basic:
             #    realm: "Secured Demo Area"
 
